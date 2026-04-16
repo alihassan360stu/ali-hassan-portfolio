@@ -6,7 +6,7 @@ import {
   Cloud, 
   GitBranch, 
   Globe, 
-  Api, 
+  Webhook, 
   Zap, 
   Bug, 
   ArrowRight,
@@ -44,7 +44,7 @@ const Services = () => {
     cloud: Cloud,
     'git-branch': GitBranch,
     globe: Globe,
-    api: Api,
+    api: Webhook,
     zap: Zap,
     bug: Bug,
   }

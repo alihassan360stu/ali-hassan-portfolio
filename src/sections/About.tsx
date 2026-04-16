@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Award, Briefcase, Users, Zap, CheckCircle, Target, Lightbulb } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/Card'
 import { personalInfo } from '@/data/personal'
+import HeroBackground from '@/components/HeroBackground'
 
 const About = () => {
   const containerVariants = {
@@ -78,8 +79,10 @@ const About = () => {
   ]
 
   return (
-    <section id="about" className="section-padding bg-gradient-to-br from-slate-900 via-purple-900/10 to-slate-900">
-      <div className="container-padding max-w-7xl mx-auto">
+    <section id="about" className="section-padding relative overflow-hidden">
+      <HeroBackground />
+      {/* Content */}
+      <div className="container-padding relative z-10">
         {/* Section Header */}
         <motion.div
           className="text-center mb-20"

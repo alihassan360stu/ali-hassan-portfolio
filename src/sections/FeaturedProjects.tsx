@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { featuredProjects } from '@/data/projects'
+import HeroBackground from '@/components/HeroBackground'
 
 const clientProjects = featuredProjects.filter(project => project.projectType === 'client')
 const personalProjects = featuredProjects.filter(project => project.projectType === 'personal')
@@ -41,8 +42,44 @@ const FeaturedProjects = () => {
   }
 
   return (
-    <section id="projects" className="section-padding bg-gray-900/50">
-      <div className="container-padding">
+    <section id="projects" className="section-padding relative overflow-hidden">
+      {/* Hero Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
+          {/* Animated gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10" />
+          
+          {/* Floating orbs */}
+          <motion.div
+            className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.5, 0.3, 0.5],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2,
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="container-padding relative z-10">
         <motion.div
           className="text-center mb-16"
           variants={containerVariants}

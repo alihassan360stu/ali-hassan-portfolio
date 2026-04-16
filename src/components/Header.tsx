@@ -47,17 +47,17 @@ const Header = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="container-padding">
-        <nav className="flex items-center justify-between h-16">
+        <nav className="flex items-center justify-between h-18 md:h-20">
           {/* Logo */}
           <motion.div
             className="flex items-center gap-2"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">AH</span>
+            <div className="w-9 h-9 md:w-10 md:h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <span className="text-white font-bold text-sm md:text-base">AH</span>
             </div>
-            <span className="text-white font-semibold text-lg">Ali Hassan</span>
+            <span className="text-white font-semibold text-xl md:text-2xl">Ali Hassan</span>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -67,7 +67,7 @@ const Header = () => {
                 <motion.button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
-                  className="text-gray-300 hover:text-white font-medium transition-colors duration-200 relative group"
+                  className="text-gray-200 hover:text-white font-semibold text-base md:text-lg transition-colors duration-200 relative group"
                   whileHover={{ y: -2 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -80,7 +80,7 @@ const Header = () => {
             {/* Social Links */}
             <div className="flex items-center gap-3">
               <motion.a
-                href="https://github.com/alihassan"
+                href="https://github.com/alihassan360stu"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-gray-800/50 border border-gray-700/50 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-800 hover:border-gray-600 transition-all duration-200"
@@ -90,7 +90,7 @@ const Header = () => {
                 <Github className="h-5 w-5" />
               </motion.a>
               <motion.a
-                href="https://linkedin.com/in/alihassan"
+                href="www.linkedin.com/in/ali-hassan-bb5283300"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-gray-800/50 border border-gray-700/50 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-800 hover:border-gray-600 transition-all duration-200"
@@ -100,7 +100,7 @@ const Header = () => {
                 <Linkedin className="h-5 w-5" />
               </motion.a>
               <motion.a
-                href="mailto:alihassan@example.com"
+                href="mailto:ali.developer360@gmail.com"
                 className="w-10 h-10 rounded-full bg-gray-800/50 border border-gray-700/50 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-800 hover:border-gray-600 transition-all duration-200"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}

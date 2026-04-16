@@ -10,11 +10,15 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, children, hover = true, glass = false, ...props }, ref) => {
-    const baseStyles = 'rounded-xl border bg-white dark:bg-gray-900 shadow-lg'
+    const baseStyles = glass
+      ? 'rounded-xl border bg-white/5 backdrop-blur-md shadow-lg'
+      : 'rounded-xl border bg-white dark:bg-gray-900 shadow-lg'
     
     const hoverStyles = hover ? 'transition-all duration-300 hover:shadow-xl hover:scale-[1.02]' : ''
     
-    const glassStyles = glass ? 'glass-effect border-white/20 dark:border-white/10' : 'border-gray-200 dark:border-gray-800'
+    const glassStyles = glass
+      ? 'glass-effect border-white/15 dark:border-white/10'
+      : 'border-gray-200 dark:border-gray-800'
 
     return (
       <motion.div

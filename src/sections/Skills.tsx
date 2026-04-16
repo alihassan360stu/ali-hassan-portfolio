@@ -2,23 +2,15 @@
 
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Code, Zap, Database, Globe, Server, Wrench, Star } from 'lucide-react'
-import { Card, CardContent } from '@/components/ui/Card'
-import { Badge } from '@/components/ui/Badge'
 import { skills } from '@/data/skills'
+import HeroBackground from '@/components/HeroBackground'
 
 const Skills = () => {
   const [filter, setFilter] = useState<string>('all')
-  
-  const filteredSkills = filter === 'all' 
-    ? skills 
-    : skills.filter(skill => skill.category === filter)
 
-  // Debug: Log filter changes
-  React.useEffect(() => {
-    console.log('Filter changed to:', filter)
-    console.log('Filtered skills count:', filteredSkills.length)
-  }, [filter])
+  const filteredSkills = filter === 'all'
+    ? skills
+    : skills.filter(skill => skill.category === filter)
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -36,189 +28,110 @@ const Skills = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.5,
         ease: 'easeOut',
       },
     },
   }
 
-  const getIcon = (category: string) => {
-    const icons = {
-      'Web Development': Code,
-      'Automation': Zap,
-      'Desktop Automation': Globe,
-      'Databases': Database,
-      'DevOps & Tools': Server,
-      'Mobile Development': Wrench,
-    }
-    return icons[category as keyof typeof icons] || Code
-  }
+  const categories = ['all', ...Array.from(new Set(skills.map(skill => skill.category)))]
 
-  const getProficiencyStars = (level: string) => {
-    const levels: { [key: string]: number } = {
-      'beginner': 1,
-      'intermediate': 2,
-      'advanced': 3,
-      'expert': 4,
-    }
-    return levels[level] || 3
-  }
-
-  const getProficiencyPercent = (level: string) => {
-    const percents: { [key: string]: number } = {
-      'beginner': 20,
-      'intermediate': 40,
-      'advanced': 60,
-      'expert': 80,
-    }
-    return percents[level] || 60
-  }
+  const groupedSkills = filteredSkills.reduce<Record<string, string[]>>((acc, skill) => {
+    if (!acc[skill.category]) acc[skill.category] = []
+    acc[skill.category].push(skill.name)
+    return acc
+  }, {})
 
   return (
-    <section id="skills" className="section-padding bg-gradient-to-br from-slate-900 via-purple-900/10 to-slate-900">
-      <div className="container-padding max-w-7xl mx-auto">
+    <section id="skills" className="section-padding relative overflow-hidden">
+      <HeroBackground />
+      {/* Content */}
+      <div className="container-padding relative z-10">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-14"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.h2
-            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-5"
             variants={itemVariants}
           >
-            <span className="bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
               Technical Skills
             </span>
           </motion.h2>
-          <motion.div
-            className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"
-            variants={itemVariants}
-          />
           <motion.p
-            className="text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
             variants={itemVariants}
           >
-            Comprehensive expertise across multiple technologies and frameworks
+            A focused toolkit I use to build modern, reliable products.
           </motion.p>
         </motion.div>
 
         {/* Filter Buttons */}
         <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-16"
+          className="flex flex-wrap justify-center gap-2.5 mb-12"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          <motion.button
-            onClick={() => setFilter('all')}
-            className={`px-6 py-3 rounded-full font-semibold text-lg transition-all duration-300 ${
-              filter === 'all'
-                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-purple-500/25 scale-105'
-                : 'bg-gray-800/50 backdrop-blur-sm text-gray-300 hover:bg-gray-800 hover:text-white border border-gray-700/50'
-            }`}
-            variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            All Skills
-          </motion.button>
-          {['Web Development', 'Automation', 'Desktop Automation', 'Databases', 'DevOps & Tools', 'Mobile Development'].map((category) => (
+          {categories.map((category) => (
             <motion.button
               key={category}
               onClick={() => setFilter(category)}
-              className={`px-6 py-3 rounded-full font-semibold text-lg transition-all duration-300 ${
+              className={`px-4 py-2 rounded-full text-sm md:text-base font-semibold transition-all duration-200 ${
                 filter === category
-                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-purple-500/25 scale-105'
-                  : 'bg-gray-800/50 backdrop-blur-sm text-gray-300 hover:bg-gray-800 hover:text-white border border-gray-700/50'
+                  ? 'bg-white/15 text-white border border-white/25 backdrop-blur-md'
+                  : 'bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10 backdrop-blur-md'
               }`}
               variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ y: -1 }}
               whileTap={{ scale: 0.95 }}
             >
-              {category}
+              {category.charAt(0).toUpperCase() + category.slice(1)}
             </motion.button>
           ))}
         </motion.div>
 
-        {/* Skills Grid */}
+        {/* Skills (clean grouped pills) */}
         <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20"
+          className="mx-auto max-w-6xl"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {filteredSkills.map((skill, index) => (
-            <motion.div key={skill.name} variants={itemVariants}>
-              <Card glass className="h-full p-8">
-                <CardContent className="space-y-6 h-full flex flex-col">
-                  {/* Skill Header */}
-                  <div className="flex items-center gap-4">
-                    <motion.div
-                      className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-600/20 flex items-center justify-center"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {React.createElement(getIcon(skill.category), { className: "h-8 w-8 text-blue-400" })}
-                    </motion.div>
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-white mb-2">
-                        {skill.name}
-                      </h3>
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg text-gray-400">Proficiency:</span>
-                        <div className="flex gap-1">
-                          {Array.from({ length: 5 }, (_, i) => (
-                            <Star
-                              key={i}
-                              className={`h-5 w-5 ${
-                                i < getProficiencyStars(skill.level)
-                                  ? 'text-yellow-400 fill-yellow-400'
-                                  : 'text-gray-600'
-                              }`}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {Object.entries(groupedSkills)
+              .sort(([a], [b]) => a.localeCompare(b))
+              .map(([category, names]) => (
+                <motion.div
+                  key={category}
+                  className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6"
+                  variants={itemVariants}
+                >
+                  <div className="flex items-baseline justify-between gap-3 mb-4">
+                    <h3 className="text-xl md:text-2xl font-semibold text-white">
+                      {category}
+                    </h3>
+                    <span className="text-sm text-gray-400">{names.length}</span>
                   </div>
-
-                  {/* Technologies */}
-                  <div className="flex-1">
-                    <h4 className="text-xl font-semibold text-white mb-4">Technologies</h4>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary" className="text-sm px-3 py-1.5">
-                        {skill.name}
-                      </Badge>
-                    </div>
+                  <div className="flex flex-wrap gap-2">
+                    {names
+                      .sort((a, b) => a.localeCompare(b))
+                      .map((name) => (
+                        <span key={name} className="skill-badge">
+                          {name}
+                        </span>
+                      ))}
                   </div>
-
-                  {/* Proficiency Bar */}
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-lg text-gray-400">Skill Level</span>
-                      <span className="text-lg font-bold text-white">{skill.level}</span>
-                    </div>
-                    <div className="w-full bg-gray-700/50 rounded-full h-3">
-                      <motion.div
-                        className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${getProficiencyPercent(skill.level)}%` }}
-                        transition={{ duration: 1, delay: index * 0.1 }}
-                      />
-                    </div>
-                    <div className="text-right mt-2">
-                      <span className="text-sm text-gray-400">{getProficiencyPercent(skill.level)}%</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                </motion.div>
+              ))}
+          </div>
         </motion.div>
       </div>
     </section>
