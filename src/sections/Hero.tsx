@@ -126,7 +126,7 @@ const Hero = () => {
         {/* Status Badge */}
         <motion.div variants={itemVariants}>
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30 text-green-400 mb-6 md:mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30 text-green-400 mt-2 sm:mt-3 mb-6 md:mb-8"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
@@ -311,7 +311,7 @@ const Hero = () => {
 
         {/* Stats */}
         <motion.div
-          className="grid grid-cols-4 gap-2 sm:gap-4 md:gap-8 mb-10"
+          className="grid grid-cols-4 gap-2 sm:gap-4 md:gap-8 mb-6 md:mb-10"
           variants={itemVariants}
         >
           {[
@@ -339,7 +339,7 @@ const Hero = () => {
 
         {/* Scroll Indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="flex justify-center mt-1 pointer-events-none"
           animate={{
             y: [0, 10, 0],
           }}
