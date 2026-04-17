@@ -78,14 +78,23 @@ const About = () => {
     }
   ]
 
+  const highlights = [
+    'Automation systems that reduce manual work and improve reliability',
+    'Clean, scalable full‑stack apps with modern UI and performance focus',
+    'Production-ready delivery: observability, security, maintainability',
+    'Clear communication and a product-first mindset'
+  ]
+
+  const focusAreas = ['Automation', 'SaaS', 'Dashboards', 'APIs', 'Scraping', 'CI/CD']
+
   return (
-    <section id="about" className="section-padding relative overflow-hidden">
+    <section id="about" className="section-padding relative overflow-hidden pb-12 md:pb-16">
       <HeroBackground />
       {/* Content */}
       <div className="container-padding relative z-10">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-14"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -104,7 +113,7 @@ const About = () => {
             variants={itemVariants}
           />
           <motion.p
-            className="text-xl text-gray-400 max-w-3xl mx-auto mt-8 leading-relaxed"
+            className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mt-6 leading-relaxed"
             variants={itemVariants}
           >
             Passionate automation engineer and full-stack developer with expertise in building scalable solutions
@@ -113,21 +122,51 @@ const About = () => {
 
         {/* Professional Summary */}
         <motion.div
-          className="mb-20"
+          className="mb-14"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          <Card glass className="p-8 md:p-12">
-            <CardContent className="space-y-8">
-              <motion.div variants={itemVariants}>
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
-                  Professional Summary
-                </h3>
-                <p className="text-lg text-gray-300 leading-relaxed">
-                  {personalInfo.intro}
-                </p>
+          <Card glass className="p-8 md:p-12 overflow-hidden">
+            <CardContent className="space-y-10">
+              <motion.div variants={itemVariants} className="relative">
+                <div className="absolute inset-0 -m-12 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5" />
+                <div className="relative grid lg:grid-cols-2 gap-10">
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-5">
+                      Professional Summary
+                    </h3>
+                    <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+                      {personalInfo.intro}
+                    </p>
+
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {focusAreas.map((item) => (
+                        <span
+                          key={item}
+                          className="px-3 py-1.5 rounded-full text-sm font-semibold bg-white/5 border border-white/10 text-gray-200"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6">
+                    <h4 className="text-lg md:text-xl font-semibold text-white mb-4">
+                      Highlights
+                    </h4>
+                    <ul className="space-y-3">
+                      {highlights.map((h) => (
+                        <li key={h} className="flex items-start gap-3 text-gray-300">
+                          <CheckCircle className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
+                          <span className="leading-relaxed">{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </motion.div>
 
               {/* Expertise Areas */}
@@ -173,7 +212,7 @@ const About = () => {
 
         {/* Stats Grid */}
         <motion.div
-          className="mb-20"
+          className="mb-14"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

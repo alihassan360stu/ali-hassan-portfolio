@@ -42,6 +42,13 @@ const Skills = () => {
     return acc
   }, {})
 
+  const highlights = [
+    { label: 'Frontend', value: 'React / Next.js', category: 'Web Development' },
+    { label: 'Automation', value: 'n8n / Selenium', category: 'Automation' },
+    { label: 'Backend', value: 'Node / APIs', category: 'Web Development' },
+    { label: 'DevOps', value: 'Docker / CI', category: 'DevOps & Tools' }
+  ]
+
   return (
     <section id="skills" className="section-padding relative overflow-hidden">
       <HeroBackground />
@@ -97,6 +104,37 @@ const Skills = () => {
           ))}
         </motion.div>
 
+        {/* Highlights */}
+        <motion.div
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {highlights.map((h) => (
+            <motion.button
+              key={h.label}
+              type="button"
+              onClick={() => setFilter(h.category)}
+              className="text-left rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-4 hover:bg-white/8 transition-colors"
+              variants={itemVariants}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.99 }}
+            >
+              <div className="text-xs uppercase tracking-wider text-gray-400 font-semibold">
+                {h.label}
+              </div>
+              <div className="mt-1 text-base md:text-lg font-semibold text-white">
+                {h.value}
+              </div>
+              <div className="mt-2 text-xs text-gray-400">
+                {h.category}
+              </div>
+            </motion.button>
+          ))}
+        </motion.div>
+
         {/* Skills (clean grouped pills) */}
         <motion.div
           className="mx-auto max-w-6xl"
@@ -111,9 +149,10 @@ const Skills = () => {
               .map(([category, names]) => (
                 <motion.div
                   key={category}
-                  className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6"
+                  className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 relative overflow-hidden"
                   variants={itemVariants}
                 >
+                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-pink-500/40" />
                   <div className="flex items-baseline justify-between gap-3 mb-4">
                     <h3 className="text-xl md:text-2xl font-semibold text-white">
                       {category}

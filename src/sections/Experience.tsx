@@ -6,6 +6,7 @@ import { Calendar, MapPin, Building, Award, TrendingUp } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { experiences } from '@/data/experience'
+import HeroBackground from '@/components/HeroBackground'
 
 const Experience = () => {
   const containerVariants = {
@@ -31,8 +32,9 @@ const Experience = () => {
   }
 
   return (
-    <section id="experience" className="section-padding bg-gray-900">
-      <div className="container-padding">
+    <section id="experience" className="section-padding relative overflow-hidden">
+      <HeroBackground />
+      <div className="container-padding relative z-10">
         <motion.div
           className="text-center mb-16"
           variants={containerVariants}
