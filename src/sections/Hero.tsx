@@ -30,7 +30,7 @@ const Hero = () => {
   }
 
   return (
-    <section className="min-h-[78vh] md:min-h-screen flex items-start md:items-center justify-center relative overflow-hidden pt-24 sm:pt-28 pb-10 sm:pb-16 md:py-0">
+    <section className="min-h-[54vh] md:min-h-screen flex items-start md:items-center justify-center relative overflow-hidden pt-10 sm:pt-12 pb-8 sm:pb-12 md:py-0">
       {/* Hero Background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
@@ -107,7 +107,7 @@ const Hero = () => {
         {/* Status Badge */}
         <motion.div variants={itemVariants}>
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30 text-green-400 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30 text-green-400 mb-6 md:mb-8"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
@@ -119,7 +119,7 @@ const Hero = () => {
         </motion.div>
 
         {/* Profile Picture */}
-        <motion.div variants={itemVariants} className="flex justify-center mb-8">
+        <motion.div variants={itemVariants} className="flex justify-center mb-6 md:mb-8">
           <motion.div
             className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 p-1 flex items-center justify-center shadow-2xl shadow-purple-500/25 border-2 border-white/10"
             whileHover={{ scale: 1.1, rotate: 5 }}
@@ -130,7 +130,7 @@ const Hero = () => {
         </motion.div>
 
         {/* Main Heading */}
-        <motion.div variants={itemVariants} className="mb-8">
+        <motion.div variants={itemVariants} className="mb-6 md:mb-8">
           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3">
             <span className="bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent leading-tight">
               Hi, I'm {personalInfo.name.split(' ')[0]}
@@ -148,7 +148,7 @@ const Hero = () => {
 
         {/* Tagline */}
         <motion.p
-          className="text-lg md:text-xl lg:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-light"
+          className="text-lg md:text-xl lg:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-light mb-6 sm:mb-8"
           variants={itemVariants}
         >
           {personalInfo.tagline}
@@ -156,7 +156,7 @@ const Hero = () => {
 
         {/* CTA Buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+          className="flex flex-col sm:flex-row gap-4 justify-center mb-10 md:mb-12"
           variants={itemVariants}
         >
           <Button

@@ -42,7 +42,7 @@ const Header = () => {
     const element = document.querySelector(href)
     if (!element) return
 
-    const headerOffset = isMobile ? 84 : 96
+    const headerOffset = isMobile ? 60 : 96
     const elementTop = (element as HTMLElement).getBoundingClientRect().top + window.pageYOffset
     const target = Math.max(0, elementTop - headerOffset)
 
@@ -65,7 +65,7 @@ const Header = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="container-padding">
-        <nav className="flex items-center justify-between h-16 md:h-20">
+        <nav className="flex items-center justify-between h-12 md:h-20">
           {/* Logo */}
           <motion.div
             className="flex items-center gap-3 min-w-0"
