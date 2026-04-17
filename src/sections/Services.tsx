@@ -3,19 +3,19 @@
 import React from 'react'
 import MotionOnDesktop from '@/components/MotionOnDesktop'
 import { 
-  Cloud, 
-  GitBranch, 
-  Globe, 
-  Webhook, 
+  Code2,
+  Layers,
+  Building2,
+  Webhook,
+  GitBranch,
   Zap, 
-  Bug, 
+  Gauge,
   ArrowRight,
   CheckCircle
 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
-import { services } from '@/data/services'
 
 const Services = () => {
   const containerVariants = {
@@ -40,14 +40,81 @@ const Services = () => {
     },
   }
 
-  const iconMap = {
-    cloud: Cloud,
-    'git-branch': GitBranch,
-    globe: Globe,
-    api: Webhook,
-    zap: Zap,
-    bug: Bug,
-  }
+  const services = [
+    {
+      title: 'Full Stack Application Development',
+      icon: Code2,
+      category: 'Web',
+      points: [
+        'Scalable web applications using React, Next.js, Node.js',
+        'REST APIs, backend systems, database design',
+        'Production-ready architecture and deployment',
+      ],
+    },
+    {
+      title: 'SaaS Product Development',
+      icon: Layers,
+      category: 'SaaS',
+      points: [
+        'Complete SaaS platforms with authentication, subscriptions, dashboards',
+        'Multi-tenant architecture and API-driven systems',
+        'Scalable and production-grade SaaS solutions',
+      ],
+    },
+    {
+      title: 'Enterprise Automation Engineering',
+      icon: Building2,
+      category: 'Automation',
+      points: [
+        'Desktop and enterprise automation using Java Access Bridge (JAB) and Selenium',
+        'Banking and enterprise workflow automation (UBL experience)',
+        'Reduce manual work and improve operational efficiency',
+      ],
+    },
+    {
+      title: 'Workflow Automation (n8n)',
+      icon: Webhook,
+      category: 'Automation',
+      points: [
+        'Build API-based workflow automation using n8n',
+        'Integrate CRMs, databases, webhooks, and third-party services',
+        'Automate data syncing, notifications, and workflows',
+      ],
+    },
+    {
+      title: 'Data Pipeline Automation (Apache Airflow)',
+      icon: GitBranch,
+      category: 'Data Engineering',
+      points: [
+        'Design DAG-based data pipelines and workflows',
+        'ETL processes, scheduling, and task orchestration',
+        'Reliable and scalable data engineering workflows',
+      ],
+    },
+    {
+      title: 'AI Automation Systems',
+      icon: Zap,
+      category: 'AI',
+      points: [
+        'Build AI-powered automation using LLMs and APIs',
+        'Intelligent workflows, decision systems, and content/data automation',
+        'Combine AI with automation tools for smart systems',
+      ],
+    },
+    {
+      title: 'Performance Optimization & Scaling',
+      icon: Gauge,
+      category: 'Performance',
+      points: [
+        'Optimize frontend and backend performance',
+        'Improve API speed, database efficiency, and system scalability',
+        'Production-level performance tuning',
+      ],
+    },
+  ]
+
+  const closingLine =
+    'Focused on building scalable, production-ready, and enterprise-grade systems across web, automation, and AI domains.'
 
   return (
     <section id="services" className="section-padding pb-8 md:pb-12 lg:pb-16 relative overflow-hidden">
@@ -78,14 +145,14 @@ const Services = () => {
             className="text-xl text-gray-400 max-w-3xl mx-auto"
             motionProps={{ variants: itemVariants }}
           >
-            Comprehensive services for building scalable automation systems and high-performance web applications.
+            Engineering-focused delivery across full stack web development, SaaS platforms, enterprise automation, workflows, data pipelines, and AI automation.
           </MotionOnDesktop>
         </MotionOnDesktop>
 
-        {/* Services Grid */}
+        {/* Services */}
         <MotionOnDesktop
           as="div"
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="max-w-6xl mx-auto"
           motionProps={{
             variants: containerVariants,
             initial: 'hidden',
@@ -93,63 +160,48 @@ const Services = () => {
             viewport: { once: true, margin: '-100px' },
           }}
         >
-          {services.map((service, index) => {
-            const Icon = iconMap[service.icon as keyof typeof iconMap] || Cloud
-            return (
-              <MotionOnDesktop as="div" key={service.id} motionProps={{ variants: itemVariants }}>
-                <Card glass className="h-full hover:shadow-2xl transition-all duration-300">
-                  <CardHeader>
-                    <MotionOnDesktop
-                      as="div"
-                      className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center mb-4"
-                      motionProps={{
-                        whileHover: { scale: 1.1, rotate: 5 },
-                        transition: { duration: 0.2 },
-                      }}
-                    >
-                      <Icon className="h-8 w-8 text-white" />
-                    </MotionOnDesktop>
-                    <CardTitle className="text-white text-xl mb-3">
-                      {service.title}
-                    </CardTitle>
-                    <p className="text-gray-400">
-                      {service.description}
-                    </p>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    {/* Features */}
-                    <div>
-                      <h4 className="text-sm font-semibold text-white mb-3">What's Included</h4>
-                      <div className="space-y-2">
-                        {service.features.map((feature, idx) => (
-                          <MotionOnDesktop
-                            as="div"
-                            key={idx}
-                            className="flex items-start gap-3"
-                            motionProps={{
-                              initial: { opacity: 0, x: -20 },
-                              animate: { opacity: 1, x: 0 },
-                              transition: { delay: idx * 0.1 },
-                            }}
-                          >
-                            <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                            <span className="text-gray-300 text-sm">{feature}</span>
-                          </MotionOnDesktop>
-                        ))}
-                      </div>
-                    </div>
+          <MotionOnDesktop as="div" className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" motionProps={{ variants: itemVariants }}>
+            {services.map((service) => {
+              const Icon = service.icon
 
-                    {/* Category Badge */}
-                    <div>
-                      <Badge variant="outline" className="text-xs">
-                        {service.category}
-                      </Badge>
-                    </div>
-                  </CardContent>
-                </Card>
-              </MotionOnDesktop>
-            )
-          })}
+              return (
+                <MotionOnDesktop as="div" key={service.title} motionProps={{ variants: itemVariants }}>
+                  <Card glass className="h-full">
+                    <CardHeader>
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center mb-4">
+                        <Icon className="h-7 w-7 text-white" />
+                      </div>
+                      <CardTitle className="text-white text-xl">
+                        {service.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-5">
+                      <div>
+                        <div className="space-y-2">
+                          {service.points.map((point) => (
+                            <div key={point} className="flex items-start gap-3">
+                              <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
+                              <span className="text-gray-300 text-sm leading-relaxed">{point}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <Badge variant="outline" className="text-xs">
+                          {service.category}
+                        </Badge>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </MotionOnDesktop>
+              )
+            })}
+          </MotionOnDesktop>
+
+          <MotionOnDesktop as="p" className="mt-8 text-gray-300 text-base sm:text-lg leading-relaxed" motionProps={{ variants: itemVariants }}>
+            {closingLine}
+          </MotionOnDesktop>
         </MotionOnDesktop>
 
         {/* Service Process */}
@@ -171,10 +223,10 @@ const Services = () => {
                 </h3>
                 <div className="grid md:grid-cols-4 gap-8">
                   {[
-                    { step: '1', title: 'Discovery', description: 'Understanding your requirements and business goals' },
-                    { step: '2', title: 'Planning', description: 'Creating detailed project roadmap and architecture' },
-                    { step: '3', title: 'Development', description: 'Building the solution with agile methodology' },
-                    { step: '4', title: 'Delivery', description: 'Testing, deployment, and ongoing support' }
+                    { step: '1', title: 'Requirements', description: 'Clarify scope, constraints, and system interfaces' },
+                    { step: '2', title: 'Architecture', description: 'Design workflow topology, integrations, and failure handling' },
+                    { step: '3', title: 'Implementation', description: 'Build, test, and iterate with production-grade reliability in mind' },
+                    { step: '4', title: 'Operations', description: 'Deployment, monitoring, and continuous improvements' }
                   ].map((process, index) => (
                     <MotionOnDesktop
                       as="div"
@@ -218,10 +270,10 @@ const Services = () => {
             <Card glass>
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold text-white mb-4">
-                  Ready to Start Your Project?
+                  Collaboration & delivery
                 </h3>
                 <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
-                  Let's discuss how I can help you build scalable automation systems and high-performance web applications that drive your business forward.
+                  Clear requirements, system-level thinking, and production-grade delivery.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
@@ -230,7 +282,7 @@ const Services = () => {
                     href="#contact"
                     className="group"
                   >
-                    Get Started
+                    Contact
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                   <Button
