@@ -1,12 +1,31 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
-import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles, Code, Zap, User } from 'lucide-react'
+import { createPortal } from 'react-dom'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles, Code, Zap, X } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { personalInfo } from '@/data/personal'
 
 const Hero = () => {
+  const [mounted, setMounted] = React.useState(false)
+  const [profileOpen, setProfileOpen] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  React.useEffect(() => {
+    if (!profileOpen) return
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setProfileOpen(false)
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [profileOpen])
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -125,9 +144,73 @@ const Hero = () => {
             whileHover={{ scale: 1.1, rotate: 5 }}
             transition={{ duration: 0.3 }}
           >
-            <User className="h-16 w-16 md:h-20 md:w-20 text-white" />
+            <button
+              type="button"
+              onClick={() => setProfileOpen(true)}
+              className="h-full w-full rounded-full overflow-hidden"
+              aria-label="Open profile image"
+            >
+              <img
+                src={personalInfo.avatar}
+                alt={personalInfo.name}
+                className="h-full w-full rounded-full object-cover"
+                loading="eager"
+              />
+            </button>
           </motion.div>
         </motion.div>
+
+        {mounted &&
+          createPortal(
+            <AnimatePresence>
+              {profileOpen && (
+                <motion.div
+                  className="fixed inset-0 z-[120]"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <motion.button
+                    type="button"
+                    aria-label="Close profile image"
+                    className="absolute inset-0 bg-black/85"
+                    onClick={() => setProfileOpen(false)}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  />
+
+                  <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
+                    <motion.div
+                      className="relative w-full max-w-md"
+                      initial={{ opacity: 0, scale: 0.98, y: 10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.98, y: 10 }}
+                      transition={{ duration: 0.18 }}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setProfileOpen(false)}
+                        className="absolute top-3 right-3 z-[130] w-11 h-11 rounded-full bg-black/80 hover:bg-black/90 border border-white/25 backdrop-blur-md shadow-lg shadow-black/60 flex items-center justify-center text-white"
+                        aria-label="Close"
+                      >
+                        <X className="h-5 w-5" />
+                      </button>
+
+                      <div className="rounded-3xl overflow-hidden border border-white/15 bg-black">
+                        <img
+                          src={personalInfo.avatar}
+                          alt={personalInfo.name}
+                          className="w-full max-h-[85vh] object-contain"
+                        />
+                      </div>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>,
+            document.body
+          )}
 
         {/* Main Heading */}
         <motion.div variants={itemVariants} className="mb-6 md:mb-8">
