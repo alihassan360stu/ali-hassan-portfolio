@@ -46,9 +46,9 @@ const Services = () => {
       icon: Code2,
       category: 'Web',
       points: [
-        'Scalable web applications using React, Next.js, Node.js',
-        'REST APIs, backend systems, database design',
-        'Production-ready architecture and deployment',
+        'React + Next.js application architecture with TypeScript-first patterns',
+        'Node.js backend services, REST APIs, auth flows, and integration layers',
+        'Database design (schema, indexing, transactions) and API-driven systems',
       ],
     },
     {
@@ -56,9 +56,9 @@ const Services = () => {
       icon: Layers,
       category: 'SaaS',
       points: [
-        'Complete SaaS platforms with authentication, subscriptions, dashboards',
-        'Multi-tenant architecture and API-driven systems',
-        'Scalable and production-grade SaaS solutions',
+        'Multi-tenant SaaS engineering: tenant isolation, data boundaries, and RBAC',
+        'Authentication, subscriptions, billing flows, dashboards, and audit-ready UX',
+        'API-driven product backends with deployment and operational considerations',
       ],
     },
     {
@@ -66,9 +66,9 @@ const Services = () => {
       icon: Building2,
       category: 'Automation',
       points: [
-        'Desktop and enterprise automation using Java Access Bridge (JAB) and Selenium',
-        'Banking and enterprise workflow automation (UBL experience)',
-        'Reduce manual work and improve operational efficiency',
+        'Enterprise automation using Java Access Bridge (JAB) + Selenium with robust failure handling',
+        'Real banking automation experience: UBL system automation across 24 modules',
+        'Reliability engineering: retries, state recovery, logging, and process-level observability',
       ],
     },
     {
@@ -76,9 +76,9 @@ const Services = () => {
       icon: Webhook,
       category: 'Automation',
       points: [
-        'Build API-based workflow automation using n8n',
-        'Integrate CRMs, databases, webhooks, and third-party services',
-        'Automate data syncing, notifications, and workflows',
+        'n8n workflow systems: event-driven orchestration, webhooks, and API-first automation',
+        'Integrations across CRMs, databases, queues, and third-party services with secure credentials handling',
+        'Production workflows: idempotency, retries, dead-letter patterns, and execution monitoring',
       ],
     },
     {
@@ -86,9 +86,9 @@ const Services = () => {
       icon: GitBranch,
       category: 'Data Engineering',
       points: [
-        'Design DAG-based data pipelines and workflows',
-        'ETL processes, scheduling, and task orchestration',
-        'Reliable and scalable data engineering workflows',
+        'Airflow DAG design for ETL pipelines, scheduling, and dependency-aware orchestration',
+        'Pipeline reliability: SLAs, retries, backfills, and data quality guardrails',
+        'Scalable task execution patterns for production data workflows',
       ],
     },
     {
@@ -96,9 +96,9 @@ const Services = () => {
       icon: Zap,
       category: 'AI',
       points: [
-        'Build AI-powered automation using LLMs and APIs',
-        'Intelligent workflows, decision systems, and content/data automation',
-        'Combine AI with automation tools for smart systems',
+        'LLM-based automation systems using AI APIs for structured decision workflows',
+        'AI agents for tool-using automation, document processing, and controlled content generation',
+        'Combine AI with workflow/pipeline orchestration for repeatable, auditable intelligent systems',
       ],
     },
     {
@@ -106,9 +106,9 @@ const Services = () => {
       icon: Gauge,
       category: 'Performance',
       points: [
-        'Optimize frontend and backend performance',
-        'Improve API speed, database efficiency, and system scalability',
-        'Production-level performance tuning',
+        'Profiling-driven optimization across frontend, backend, APIs, and database queries',
+        'Caching, pagination, indexing, and rate-limit aware API design for real workloads',
+        'Scalability planning: bottleneck analysis, resilience, and production monitoring approach',
       ],
     },
   ]
@@ -145,7 +145,7 @@ const Services = () => {
             className="text-xl text-gray-400 max-w-3xl mx-auto"
             motionProps={{ variants: itemVariants }}
           >
-            Engineering-focused delivery across full stack web development, SaaS platforms, enterprise automation, workflows, data pipelines, and AI automation.
+            Senior-level engineering across full stack web systems, SaaS product backends, enterprise automation, workflow orchestration, data pipelines, and AI-assisted automation.
           </MotionOnDesktop>
         </MotionOnDesktop>
 
