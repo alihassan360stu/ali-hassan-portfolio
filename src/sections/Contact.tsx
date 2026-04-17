@@ -100,7 +100,7 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" className="section-padding relative overflow-hidden">
+    <section id="contact" className="section-padding pt-8 md:pt-12 lg:pt-16 relative overflow-hidden">
       <HeroBackground />
       {/* Content */}
       <div className="container-padding relative z-10">

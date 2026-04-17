@@ -115,7 +115,7 @@ const ProjectsWork = () => {
   const activeMeta = tabs.find((t) => t.key === activeTab)!
 
   return (
-    <section id="projects" className="section-padding relative overflow-hidden">
+    <section id="projects" className="section-padding scroll-mt-20 md:scroll-mt-28 relative overflow-hidden">
       <HeroBackground />
 
       <div className="container-padding relative z-10">
@@ -391,16 +391,6 @@ const ProjectsWork = () => {
                             Source Code
                           </a>
                         )}
-                        {p.media?.screenshots?.length ? (
-                          <button
-                            type="button"
-                            onClick={() => setSelected(p)}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold border border-white/10 bg-white/5 hover:bg-white/10 text-gray-100 transition-colors"
-                          >
-                            <ImageIcon className="h-4 w-4" />
-                            Screenshots
-                          </button>
-                        ) : null}
                       </>
                     )}
                   </div>

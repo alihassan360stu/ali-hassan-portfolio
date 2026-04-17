@@ -123,6 +123,6 @@ export const education = [
     location: 'Karachi, Pakistan',
     startDate: '2016',
     endDate: '2020',
-    gpa: '3.8/4.0'
+    gpa: '3.2/4.0'
   }
 ]

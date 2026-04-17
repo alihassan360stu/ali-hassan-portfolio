@@ -181,7 +181,7 @@ export const workProjects: WorkProject[] = [
         '/projects/workflow/executions.jpg',
         '/projects/workflow/workflow_create.jpg',
         '/projects/workflow/update_properties.jpg',
-        ]
+      ]
     }
   },
   {
@@ -221,28 +221,50 @@ export const workProjects: WorkProject[] = [
     badge: 'Confidential'
   },
   {
-    id: 'automation-selenium-reporting',
-    category: 'automation',
-    title: 'Selenium Reporting Bot',
-    description: 'Automated portal logins, report downloads, and scheduled delivery to stakeholders.',
-    techStack: ['Selenium', 'Python', 'Airflow'],
-    badge: 'Automation',
-    media: {
-      videoUrl: '/projects/automation/selenium-demo.mp4',
-      screenshots: ['/projects/automation/selenium-1.png']
-    }
-  },
-  {
     id: 'personal-portfolio',
     category: 'personal',
     title: 'Developer Portfolio',
-    description: 'A modern portfolio website with reusable sections, animations, and a consistent hero background.',
-    techStack: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion'],
+    description:
+      'A high-end personal portfolio built to showcase enterprise automation and full-stack work with a VIP, mobile-first UI. Includes structured sections (Hero, About, Skills, Projects, Experience, Services, Contact), expandable project case studies with media viewer, and refined UX for performance, readability, and accessibility.',
+    vip: true,
+    experienceLevel: 'Advanced',
+    role: 'Full Stack Developer (Owner)',
+    contributions: [
+      'Designed and implemented the complete UI/UX, layout system, and responsive behavior (mobile-first)',
+      'Built reusable section components and consistent styling with Tailwind + glassmorphism design language',
+      'Implemented an advanced Projects & Work system with tabs, VIP badges, detailed modal case studies, and fullscreen media viewer',
+      'Fixed hydration-safe client logic for window-based behavior (mobile detection / reduced motion)',
+      'Improved accessibility with semantic structure, button labels, and keyboard close support for overlays'
+    ],
+    features: [
+      'VIP, professional design with glass panels, gradients, and strong typography hierarchy',
+      'Projects & Work tabs: Client / Automation / Personal with fast filtering and counts',
+      'Project case study modal with responsibilities, features, tech stack, and media gallery',
+      'Fullscreen image viewer with visible close button and ESC support',
+      'Mobile optimizations: reduced heavy animations, tighter spacing, better readability',
+      'Stable header behavior with smooth anchor scrolling offsets',
+      'Expandable experience cards to keep the page compact while preserving detail',
+      'Contact section with structured cards + social links'
+    ],
+    techStack: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'Framer Motion',
+      'Lucide Icons'
+    ],
     badge: 'Featured',
-    liveDemoUrl: 'https://example.com',
-    sourceCodeUrl: 'https://github.com/example',
     media: {
-      screenshots: ['/projects/personal/portfolio-1.png', '/projects/personal/portfolio-2.png']
+      screenshots: [
+        '/projects/portflolio/hero_section .jpg',
+        '/projects/portflolio/skills.jpg',
+        '/projects/portflolio/projects.jpg',
+        '/projects/portflolio/details.jpg',
+        '/projects/portflolio/experience.jpg',
+        '/projects/portflolio/services.jpg',
+        '/projects/portflolio/in_touch .jpg',
+      ]
     }
   }
 ]
