@@ -182,6 +182,7 @@ export const otherProjects: Project[] = [
     ],
     role: 'Backend Developer',
     category: 'other',
+    projectType: 'personal',
     githubUrl: 'https://github.com/alihassan/headless-cms',
     tags: ['CMS', 'GraphQL', 'Backend']
   },
