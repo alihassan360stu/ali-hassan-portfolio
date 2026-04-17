@@ -116,6 +116,32 @@ const Experience = () => {
                           </p>
                         </div>
 
+                        {experience.responsibilities && experience.responsibilities.length > 0 && (
+                          <div>
+                            <h5 className="text-lg font-semibold text-white mb-4">Responsibilities</h5>
+                            <div className="space-y-3">
+                              {experience.responsibilities.map((responsibility, idx) => (
+                                <motion.div
+                                  key={idx}
+                                  className="flex items-start gap-3"
+                                  initial={{ opacity: 0, x: -20 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: idx * 0.08 }}
+                                >
+                                  <motion.div
+                                    className="w-6 h-6 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center flex-shrink-0 mt-0.5"
+                                    whileHover={{ scale: 1.2 }}
+                                    transition={{ duration: 0.2 }}
+                                  >
+                                    <Award className="h-3 w-3 text-white" />
+                                  </motion.div>
+                                  <p className="text-gray-300">{responsibility}</p>
+                                </motion.div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
                         <div>
                           <h5 className="text-lg font-semibold text-white mb-4">Key Achievements</h5>
                           <div className="space-y-3">
@@ -153,6 +179,20 @@ const Experience = () => {
                             ))}
                           </div>
                         </div>
+
+                        {experience.modules && experience.modules.length > 0 && (
+                          <div>
+                            <h5 className="text-lg font-semibold text-white mb-4">Key Modules Built</h5>
+                            <div className="space-y-2">
+                              {experience.modules.map((module, idx) => (
+                                <div key={idx} className="flex items-start gap-2">
+                                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary-400 flex-shrink-0" />
+                                  <p className="text-gray-300">{module}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
 
                         {/* Impact Stats */}
                         <div className="p-6 rounded-lg bg-gradient-to-br from-primary-500/10 to-primary-600/10 border border-primary-500/20">
