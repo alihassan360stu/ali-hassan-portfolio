@@ -50,7 +50,7 @@ const Skills = () => {
   ]
 
   return (
-    <section id="skills" className="section-padding relative overflow-hidden">
+    <section id="skills" className="section-padding relative overflow-hidden scroll-mt-24 md:scroll-mt-28">
       <HeroBackground />
       {/* Content */}
       <div className="container-padding relative z-10">

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useMemo, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import {
   CheckCircle2,
   ExternalLink,
@@ -79,8 +79,20 @@ const tabPillGradients: Record<TabKey, string> = {
 }
 
 const ProjectsWork = () => {
+  const reducedMotion = useReducedMotion()
+  const [isMobile, setIsMobile] = useState(false)
   const [activeTab, setActiveTab] = useState<TabKey>('client')
   const [selected, setSelected] = useState<WorkProject | null>(null)
+
+  React.useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)')
+    const update = () => setIsMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+
+  const motionEnabled = !reducedMotion && !isMobile
 
   const projects = useMemo(
     () => workProjects.filter((p) => p.category === (activeTab as ProjectCategory)),
@@ -104,20 +116,20 @@ const ProjectsWork = () => {
       <div className="container-padding relative z-10">
         <motion.div
           className="text-center mb-10"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
+          variants={motionEnabled ? containerVariants : undefined}
+          initial={motionEnabled ? 'hidden' : false}
+          whileInView={motionEnabled ? 'visible' : undefined}
+          viewport={motionEnabled ? { once: true, margin: '-100px' } : undefined}
         >
           <motion.h2
-            className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
-            variants={itemVariants}
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            variants={motionEnabled ? itemVariants : undefined}
           >
             Projects &amp; Work
           </motion.h2>
           <motion.p
             className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
-            variants={itemVariants}
+            variants={motionEnabled ? itemVariants : undefined}
           >
             A curated selection of client deliveries, automation systems, and personal builds.
           </motion.p>
@@ -126,13 +138,13 @@ const ProjectsWork = () => {
         {/* Tabs */}
         <motion.div
           className="mb-10"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
+          variants={motionEnabled ? containerVariants : undefined}
+          initial={motionEnabled ? 'hidden' : false}
+          whileInView={motionEnabled ? 'visible' : undefined}
+          viewport={motionEnabled ? { once: true, margin: '-100px' } : undefined}
         >
           <div className="mx-auto max-w-5xl">
-            <div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-2 overflow-x-auto">
+            <div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-1.5 sm:p-2 overflow-x-auto">
               <div className="flex min-w-max gap-2 relative">
                 {tabs.map((t) => {
                   const Icon = getTabIcon(t.key)
@@ -142,10 +154,10 @@ const ProjectsWork = () => {
                       key={t.key}
                       type="button"
                       onClick={() => setActiveTab(t.key)}
-                      className="relative px-4 py-2.5 rounded-xl text-sm md:text-base font-semibold whitespace-nowrap"
+                      className="relative px-3.5 sm:px-4 py-2.5 rounded-xl text-sm md:text-base font-semibold whitespace-nowrap"
                       aria-pressed={isActive}
                     >
-                      {isActive && (
+                      {motionEnabled && isActive && (
                         <motion.div
                           layoutId="projects-work-active-tab"
                           className="absolute inset-0 rounded-xl border border-white/20 bg-white/12"
@@ -176,12 +188,12 @@ const ProjectsWork = () => {
         {/* Tab Header */}
         <motion.div
           className="mb-6"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
+          variants={motionEnabled ? containerVariants : undefined}
+          initial={motionEnabled ? 'hidden' : false}
+          whileInView={motionEnabled ? 'visible' : undefined}
+          viewport={motionEnabled ? { once: true, margin: '-100px' } : undefined}
         >
-          <motion.div variants={itemVariants} className="mx-auto max-w-3xl text-center">
+          <motion.div variants={motionEnabled ? itemVariants : undefined} className="mx-auto max-w-3xl text-center">
             <h3 className="text-2xl md:text-3xl font-semibold text-white">
               {activeMeta.label}
             </h3>
@@ -199,21 +211,21 @@ const ProjectsWork = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.2 }}
+            transition={motionEnabled ? { duration: 0.2 } : { duration: 0 }}
           >
             {projects.map((p) => (
               <motion.article
                 key={p.id}
                 className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden hover:bg-white/8 transition-colors"
-                variants={itemVariants}
-                whileHover={{ y: -3 }}
+                variants={motionEnabled ? itemVariants : undefined}
+                whileHover={motionEnabled ? { y: -3 } : undefined}
               >
-                <div className={`h-10 w-full bg-gradient-to-r ${tabPillGradients[p.category]} opacity-90`} />
-                <div className="p-6">
+                <div className={`h-8 sm:h-10 w-full bg-gradient-to-r ${tabPillGradients[p.category]} opacity-90`} />
+                <div className="p-5 sm:p-6">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <h3 className="text-xl font-semibold text-white leading-snug">

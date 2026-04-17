@@ -1,13 +1,26 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Award, Briefcase, Users, Zap, CheckCircle, Target, Lightbulb } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/Card'
 import { personalInfo } from '@/data/personal'
 import HeroBackground from '@/components/HeroBackground'
 
 const About = () => {
+  const reducedMotion = useReducedMotion()
+  const [isMobile, setIsMobile] = React.useState(false)
+
+  React.useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)')
+    const update = () => setIsMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+
+  const motionEnabled = !reducedMotion && !isMobile
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -88,21 +101,21 @@ const About = () => {
   const focusAreas = ['Automation', 'SaaS', 'Dashboards', 'APIs', 'Scraping', 'CI/CD']
 
   return (
-    <section id="about" className="section-padding relative overflow-hidden pb-12 md:pb-16">
+    <section id="about" className="section-padding relative overflow-hidden pb-12 md:pb-16 scroll-mt-24 md:scroll-mt-28">
       <HeroBackground />
       {/* Content */}
       <div className="container-padding relative z-10">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-14"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-10 sm:mb-12 md:mb-14"
+          variants={motionEnabled ? containerVariants : undefined}
+          initial={motionEnabled ? 'hidden' : false}
+          whileInView={motionEnabled ? 'visible' : undefined}
+          viewport={motionEnabled ? { once: true, margin: '-100px' } : undefined}
         >
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-            variants={itemVariants}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-5 sm:mb-6"
+            variants={motionEnabled ? itemVariants : undefined}
           >
             <span className="bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
               About Me
@@ -110,11 +123,11 @@ const About = () => {
           </motion.h2>
           <motion.div
             className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"
-            variants={itemVariants}
+            variants={motionEnabled ? itemVariants : undefined}
           />
           <motion.p
-            className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mt-6 leading-relaxed"
-            variants={itemVariants}
+            className="text-base sm:text-lg md:text-xl text-gray-300 sm:text-gray-400 max-w-3xl mx-auto mt-5 sm:mt-6 leading-relaxed"
+            variants={motionEnabled ? itemVariants : undefined}
           >
             Passionate automation engineer and full-stack developer with expertise in building scalable solutions
           </motion.p>
@@ -122,17 +135,17 @@ const About = () => {
 
         {/* Professional Summary */}
         <motion.div
-          className="mb-14"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          className="mb-10 sm:mb-12 md:mb-14"
+          variants={motionEnabled ? containerVariants : undefined}
+          initial={motionEnabled ? 'hidden' : false}
+          whileInView={motionEnabled ? 'visible' : undefined}
+          viewport={motionEnabled ? { once: true, margin: '-100px' } : undefined}
         >
-          <Card glass className="p-8 md:p-12 overflow-hidden">
-            <CardContent className="space-y-10">
-              <motion.div variants={itemVariants} className="relative">
+          <Card glass className="p-6 sm:p-8 md:p-12 overflow-hidden">
+            <CardContent className="space-y-8 sm:space-y-10">
+              <motion.div variants={motionEnabled ? itemVariants : undefined} className="relative">
                 <div className="absolute inset-0 -m-12 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5" />
-                <div className="relative grid lg:grid-cols-2 gap-10">
+                <div className="relative grid lg:grid-cols-2 gap-6 sm:gap-10">
                   <div>
                     <h3 className="text-2xl md:text-3xl font-bold text-white mb-5">
                       Professional Summary
@@ -141,11 +154,11 @@ const About = () => {
                       {personalInfo.intro}
                     </p>
 
-                    <div className="mt-6 flex flex-wrap gap-2">
+                    <div className="mt-5 sm:mt-6 flex flex-wrap gap-2">
                       {focusAreas.map((item) => (
                         <span
                           key={item}
-                          className="px-3 py-1.5 rounded-full text-sm font-semibold bg-white/5 border border-white/10 text-gray-200"
+                          className="px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold bg-white/5 border border-white/10 text-gray-200"
                         >
                           {item}
                         </span>
@@ -153,7 +166,7 @@ const About = () => {
                     </div>
                   </div>
 
-                  <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6">
+                  <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-6">
                     <h4 className="text-lg md:text-xl font-semibold text-white mb-4">
                       Highlights
                     </h4>
@@ -170,28 +183,28 @@ const About = () => {
               </motion.div>
 
               {/* Expertise Areas */}
-              <motion.div variants={itemVariants}>
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-8">
+              <motion.div variants={motionEnabled ? itemVariants : undefined}>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-5 sm:mb-8">
                   Expertise Focus
                 </h3>
-                <div className="grid md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                   {expertise.map((item, index) => {
                     const Icon = item.icon
                     return (
                       <motion.div
                         key={index}
-                        variants={itemVariants}
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.2 }}
+                        variants={motionEnabled ? itemVariants : undefined}
+                        whileHover={motionEnabled ? { scale: 1.05 } : undefined}
+                        transition={motionEnabled ? { duration: 0.2 } : { duration: 0 }}
                       >
-                        <Card glass className="h-full p-6">
+                        <Card glass className="h-full p-5 sm:p-6">
                           <CardContent className="space-y-4">
                             <motion.div
-                              className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center`}
-                              whileHover={{ scale: 1.1, rotate: 5 }}
-                              transition={{ duration: 0.2 }}
+                              className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center`}
+                              whileHover={motionEnabled ? { scale: 1.1, rotate: 5 } : undefined}
+                              transition={motionEnabled ? { duration: 0.2 } : { duration: 0 }}
                             >
-                              <Icon className="h-8 w-8 text-white" />
+                              <Icon className="h-7 w-7 sm:h-8 sm:w-8 text-white" />
                             </motion.div>
                             <h4 className="text-xl font-semibold text-white mb-3">
                               {item.title}
@@ -212,15 +225,15 @@ const About = () => {
 
         {/* Stats Grid */}
         <motion.div
-          className="mb-14"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          className="mb-14 hidden md:block"
+          variants={motionEnabled ? containerVariants : undefined}
+          initial={motionEnabled ? 'hidden' : false}
+          whileInView={motionEnabled ? 'visible' : undefined}
+          viewport={motionEnabled ? { once: true, margin: '-100px' } : undefined}
         >
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
-              <motion.div key={index} variants={itemVariants}>
+              <motion.div key={index} variants={motionEnabled ? itemVariants : undefined}>
                 <Card glass className="h-full p-6 text-center">
                   <CardContent className="space-y-4">
                     <motion.div
@@ -248,14 +261,14 @@ const About = () => {
 
         {/* Why Work With Me */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          variants={motionEnabled ? containerVariants : undefined}
+          initial={motionEnabled ? 'hidden' : false}
+          whileInView={motionEnabled ? 'visible' : undefined}
+          viewport={motionEnabled ? { once: true, margin: '-100px' } : undefined}
         >
           <Card glass className="p-8 md:p-12">
             <CardContent className="space-y-8">
-              <motion.div variants={itemVariants} className="text-center">
+              <motion.div variants={motionEnabled ? itemVariants : undefined} className="text-center">
                 <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
                   Why Work With Me
                 </h3>
@@ -267,35 +280,35 @@ const About = () => {
               <div className="grid md:grid-cols-3 gap-8">
                 {[
                   {
+                    icon: Zap,
+                    color: 'from-blue-500 to-purple-600',
                     title: 'Fast Delivery',
                     description: 'Rapid development with clean, maintainable code that scales with your business needs.',
-                    icon: Zap,
-                    color: 'from-blue-500 to-purple-600'
                   },
                   {
-                    title: 'Quality Focused',
-                    description: 'Enterprise-grade solutions with comprehensive testing and security best practices.',
-                    icon: Award,
-                    color: 'from-green-500 to-emerald-600'
+                    icon: Target,
+                    color: 'from-emerald-500 to-teal-600',
+                    title: 'Ownership & reliability',
+                    description: 'I take full ownership of features — from design, to implementation, to production hardening.'
                   },
                   {
-                    title: 'Client Partnership',
-                    description: 'Collaborative approach with transparent communication and ongoing support.',
-                    icon: Users,
-                    color: 'from-orange-500 to-red-600'
+                    icon: Lightbulb,
+                    color: 'from-orange-500 to-pink-600',
+                    title: 'Clear communication',
+                    description: 'Regular updates, clear trade-offs, and fast iteration cycles.'
                   }
                 ].map((item, index) => (
                   <motion.div
                     key={index}
                     className="text-center"
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
+                    variants={motionEnabled ? itemVariants : undefined}
+                    whileHover={motionEnabled ? { scale: 1.05 } : undefined}
+                    transition={motionEnabled ? { duration: 0.2 } : { duration: 0 }}
                   >
                     <motion.div
                       className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center`}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.2 }}
+                      whileHover={motionEnabled ? { scale: 1.1, rotate: 5 } : undefined}
+                      transition={motionEnabled ? { duration: 0.2 } : { duration: 0 }}
                     >
                       <item.icon className="h-10 w-10 text-white" />
                     </motion.div>
