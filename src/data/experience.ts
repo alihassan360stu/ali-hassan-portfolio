@@ -7,30 +7,67 @@ export interface Experience {
   endDate?: string
   current?: boolean
   description: string
+  responsibilities?: string[]
   achievements: string[]
   technologies: string[]
+  modules?: string[]
 }
 
 export const experiences: Experience[] = [
   {
     id: 'auton8',
     company: 'Auton8',
-    position: 'Full Stack Developer / Automation Engineer',
+    position: 'Full Stack & Automation Engineer',
     location: 'Remote',
-    startDate: '2022',
-    endDate: 'Present',
+    startDate: 'March 2022',
     current: true,
-    description: 'Leading the development of automation platforms and workflow systems for enterprise clients. Building scalable SaaS solutions that streamline business processes and reduce manual effort.',
+    description: 'Built enterprise-grade automation systems, workflow engines, and SaaS-based execution platforms focused on web automation, API orchestration, and test execution systems. Designed and developed dynamic workflow modules for API-based operations, delivered scalable backend services, integrated real-time tracking/logging/reporting, and collaborated on a SaaS dashboard for managing automation workflows used in enterprise banking operations.',
+    responsibilities: [
+      'Designed and developed a workflow automation module for executing dynamic tasks and API-based operations',
+      'Built scalable backend systems using Node.js, Express.js, NestJS, and Python',
+      'Developed automation pipelines for web testing, data validation, and API testing',
+      'Integrated real-time execution tracking, logging, and reporting systems',
+      'Worked on enterprise-level automation solutions used in banking workflows',
+      'Designed reusable automation modules for multiple internal systems',
+      'Collaborated on a SaaS-style dashboard for managing automation workflows',
+      'Led the revamp project of Auton8, improving architecture and system design',
+      'Trained multiple employees on automation workflows and system usage'
+    ],
     achievements: [
-      'Built comprehensive automation workflow engine serving 50+ enterprise clients',
-      'Designed and implemented real-time execution system processing 1M+ tasks daily',
-      'Reduced client operational costs by 60% through automation solutions',
-      'Led a team of 5 developers in building scalable microservices architecture',
-      'Implemented advanced security measures for financial industry compliance'
+      'Reduced manual testing effort by 60% using automated workflow systems',
+      'Improved execution performance of automation pipelines by 40%',
+      'Built reusable automation frameworks used across multiple enterprise projects',
+      'Delivered production-grade automation systems for real business operations',
+      'Improved system reliability through structured error handling and logging'
     ],
     technologies: [
-      'Node.js', 'React', 'TypeScript', 'PostgreSQL', 'Redis', 
-      'Docker', 'Apache Airflow', 'Selenium', 'Playwright', 'AWS'
+      'Next.js',
+      'Node.js',
+      'Express.js',
+      'NestJS',
+      'TypeScript',
+      'Selenium',
+      'Playwright',
+      'Mocha',
+      'Chai',
+      'Electron.js',
+      'Python',
+      'PyJAB',
+      'MongoDB',
+      'PostgreSQL',
+      'MySQL',
+      'Linux Deployment',
+      'GitHub'
+    ],
+    modules: [
+      'Automation Workflow Engine',
+      'Web Testing Framework',
+      'Execution Monitoring Dashboard',
+      'API Integration Layer for Automation Tasks',
+      'JAB (Java Access Bridge) Automation System',
+      'Admin Access & Role-Based User Management System',
+      'Lead Revamp Module (Auton8 Project)',
+      'Multi-Employee Task Distribution System'
     ]
   },
   {
