@@ -71,22 +71,46 @@ export const experiences: Experience[] = [
     ]
   },
   {
-    id: 'previous-company',
-    company: 'Tech Solutions Inc.',
-    position: 'Software Developer',
-    location: 'Karachi, Pakistan',
-    startDate: '2020',
-    endDate: '2022',
-    description: 'Developed web applications and automation tools for various clients. Gained experience in full-stack development and test automation.',
+    id: 'islamabad-software-house',
+    company: 'Islamabad-Based Software House',
+    position: 'Full Stack & Frontend Lead Engineer',
+    location: 'Islamabad',
+    startDate: '~1 Year',
+    description: 'Worked as a Full Stack and Frontend Lead Engineer in a 12–15 member engineering team at an Islamabad-based software company. Responsible for leading frontend architecture, contributing to full-stack development, and delivering multiple enterprise and client-based solutions.',
+    responsibilities: [
+      'Worked as a Frontend Lead Engineer, responsible for UI architecture, code structure, and frontend best practices',
+      'Contributed as a Full Stack Developer across multiple production-level applications',
+      'Collaborated with a 12–15 member engineering team including backend developers, designers, and QA engineers',
+      'Participated in system design, requirement analysis, and technical planning',
+      'Built scalable and reusable frontend components with performance optimization',
+      'Worked on both client-based and internal enterprise projects'
+    ],
     achievements: [
-      'Developed 10+ web applications using React and Node.js',
-      'Implemented automated testing frameworks reducing bugs by 40%',
-      'Built custom automation scripts for data processing',
-      'Collaborated with cross-functional teams to deliver projects on time'
+      'Delivered multiple production-grade enterprise and client-based solutions in a team of 12–15 engineers'
     ],
     technologies: [
-      'React', 'Node.js', 'Express.js', 'MongoDB', 'Jest', 
-      'Cypress', 'Python', 'Selenium'
+      'React.js',
+      'Next.js',
+      'Node.js',
+      'Express.js',
+      'Python',
+      'Odoo',
+      'MongoDB',
+      'PostgreSQL',
+      'MySQL',
+      'Redis',
+      'Tailwind CSS',
+      'MUI',
+      'GitHub',
+      'Linux Deployment'
+    ],
+    modules: [
+      'ERP-Based E-Commerce Platform (Full Ownership)',
+      'Hotel Management & Reservation System (Tazamun Project)',
+      'KPI Dashboard System',
+      'Odoo-based systems and integrations',
+      'Internal enterprise applications',
+      'Workflow automation module improvements'
     ]
   }
 ]

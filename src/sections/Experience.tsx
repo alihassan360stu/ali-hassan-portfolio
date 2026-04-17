@@ -2,13 +2,19 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Calendar, MapPin, Building, Award, TrendingUp } from 'lucide-react'
+import { Calendar, MapPin, Building, Award, TrendingUp, ChevronDown, ChevronUp } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { experiences } from '@/data/experience'
 import HeroBackground from '@/components/HeroBackground'
 
 const Experience = () => {
+  const [expandedIds, setExpandedIds] = React.useState<Record<string, boolean>>({})
+
+  const toggleExpanded = (id: string) => {
+    setExpandedIds((prev) => ({ ...prev, [id]: !prev[id] }))
+  }
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -70,6 +76,13 @@ const Experience = () => {
         >
           {experiences.map((experience, index) => (
             <motion.div key={experience.id} variants={itemVariants}>
+              {(() => {
+                const isExpanded = !!expandedIds[experience.id]
+                const previewText = experience.description.length > 160
+                  ? `${experience.description.slice(0, 160)}...`
+                  : experience.description
+
+                return (
               <Card glass className="overflow-hidden">
                 <CardContent className="p-0">
                   {/* Experience Header */}
@@ -93,7 +106,14 @@ const Experience = () => {
                         <div className="flex flex-wrap items-center gap-4 text-gray-400">
                           <div className="flex items-center gap-2">
                             <Calendar className="h-4 w-4" />
-                            <span>{experience.startDate} - {experience.endDate || 'Present'}</span>
+                            <span>
+                              {experience.startDate}
+                              {experience.current
+                                ? ' - Present'
+                                : experience.endDate
+                                  ? ` - ${experience.endDate}`
+                                  : ''}
+                            </span>
                           </div>
                           <div className="flex items-center gap-2">
                             <MapPin className="h-4 w-4" />
@@ -101,32 +121,91 @@ const Experience = () => {
                           </div>
                         </div>
                       </div>
+
+                      <div className="flex items-start justify-end">
+                        <button
+                          type="button"
+                          onClick={() => toggleExpanded(experience.id)}
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white"
+                          aria-expanded={isExpanded}
+                          aria-controls={`experience-details-${experience.id}`}
+                        >
+                          <span className="text-sm font-semibold">{isExpanded ? 'Hide details' : 'View details'}</span>
+                          {isExpanded ? (
+                            <ChevronUp className="h-4 w-4 text-white/80" />
+                          ) : (
+                            <ChevronDown className="h-4 w-4 text-white/80" />
+                          )}
+                        </button>
+                      </div>
                     </div>
+
+                    {!isExpanded && (
+                      <div className="mt-5">
+                        <p className="text-gray-300 leading-relaxed">{previewText}</p>
+                      </div>
+                    )}
                   </div>
 
                   {/* Experience Details */}
-                  <div className="p-8">
-                    <div className="grid lg:grid-cols-3 gap-8">
-                      {/* Main Content */}
-                      <div className="lg:col-span-2 space-y-6">
-                        <div>
-                          <h5 className="text-lg font-semibold text-white mb-3">Overview</h5>
-                          <p className="text-gray-300 leading-relaxed">
-                            {experience.description}
-                          </p>
-                        </div>
-
-                        {experience.responsibilities && experience.responsibilities.length > 0 && (
+                  <motion.div
+                    id={`experience-details-${experience.id}`}
+                    initial={false}
+                    animate={isExpanded ? 'open' : 'collapsed'}
+                    variants={{
+                      open: { height: 'auto', opacity: 1 },
+                      collapsed: { height: 0, opacity: 0 },
+                    }}
+                    transition={{ duration: 0.22, ease: 'easeOut' }}
+                    className="overflow-hidden"
+                  >
+                    <div className="p-8">
+                      <div className="grid lg:grid-cols-3 gap-8">
+                        {/* Main Content */}
+                        <div className="lg:col-span-2 space-y-6">
                           <div>
-                            <h5 className="text-lg font-semibold text-white mb-4">Responsibilities</h5>
+                            <h5 className="text-lg font-semibold text-white mb-3">Overview</h5>
+                            <p className="text-gray-300 leading-relaxed">
+                              {experience.description}
+                            </p>
+                          </div>
+
+                          {experience.responsibilities && experience.responsibilities.length > 0 && (
+                            <div>
+                              <h5 className="text-lg font-semibold text-white mb-4">Responsibilities</h5>
+                              <div className="space-y-3">
+                                {experience.responsibilities.map((responsibility, idx) => (
+                                  <motion.div
+                                    key={idx}
+                                    className="flex items-start gap-3"
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: idx * 0.08 }}
+                                  >
+                                    <motion.div
+                                      className="w-6 h-6 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center flex-shrink-0 mt-0.5"
+                                      whileHover={{ scale: 1.2 }}
+                                      transition={{ duration: 0.2 }}
+                                    >
+                                      <Award className="h-3 w-3 text-white" />
+                                    </motion.div>
+                                    <p className="text-gray-300">{responsibility}</p>
+                                  </motion.div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          <div>
+                            <h5 className="text-lg font-semibold text-white mb-4">Key Achievements</h5>
                             <div className="space-y-3">
-                              {experience.responsibilities.map((responsibility, idx) => (
+                              {experience.achievements.map((achievement, idx) => (
                                 <motion.div
                                   key={idx}
                                   className="flex items-start gap-3"
                                   initial={{ opacity: 0, x: -20 }}
                                   animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: idx * 0.08 }}
+                                  transition={{ delay: idx * 0.1 }}
                                 >
                                   <motion.div
                                     className="w-6 h-6 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center flex-shrink-0 mt-0.5"
@@ -135,95 +214,73 @@ const Experience = () => {
                                   >
                                     <Award className="h-3 w-3 text-white" />
                                   </motion.div>
-                                  <p className="text-gray-300">{responsibility}</p>
+                                  <p className="text-gray-300">{achievement}</p>
                                 </motion.div>
                               ))}
                             </div>
                           </div>
-                        )}
-
-                        <div>
-                          <h5 className="text-lg font-semibold text-white mb-4">Key Achievements</h5>
-                          <div className="space-y-3">
-                            {experience.achievements.map((achievement, idx) => (
-                              <motion.div
-                                key={idx}
-                                className="flex items-start gap-3"
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: idx * 0.1 }}
-                              >
-                                <motion.div
-                                  className="w-6 h-6 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center flex-shrink-0 mt-0.5"
-                                  whileHover={{ scale: 1.2 }}
-                                  transition={{ duration: 0.2 }}
-                                >
-                                  <Award className="h-3 w-3 text-white" />
-                                </motion.div>
-                                <p className="text-gray-300">{achievement}</p>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Sidebar */}
-                      <div className="space-y-6">
-                        <div>
-                          <h5 className="text-lg font-semibold text-white mb-4">Technologies</h5>
-                          <div className="flex flex-wrap gap-2">
-                            {experience.technologies.map((tech) => (
-                              <Badge key={tech} variant="secondary">
-                                {tech}
-                              </Badge>
-                            ))}
-                          </div>
                         </div>
 
-                        {experience.modules && experience.modules.length > 0 && (
+                        {/* Sidebar */}
+                        <div className="space-y-6">
                           <div>
-                            <h5 className="text-lg font-semibold text-white mb-4">Key Modules Built</h5>
-                            <div className="space-y-2">
-                              {experience.modules.map((module, idx) => (
-                                <div key={idx} className="flex items-start gap-2">
-                                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary-400 flex-shrink-0" />
-                                  <p className="text-gray-300">{module}</p>
-                                </div>
+                            <h5 className="text-lg font-semibold text-white mb-4">Technologies</h5>
+                            <div className="flex flex-wrap gap-2">
+                              {experience.technologies.map((tech) => (
+                                <Badge key={tech} variant="secondary">
+                                  {tech}
+                                </Badge>
                               ))}
                             </div>
                           </div>
-                        )}
 
-                        {/* Impact Stats */}
-                        <div className="p-6 rounded-lg bg-gradient-to-br from-primary-500/10 to-primary-600/10 border border-primary-500/20">
-                          <div className="flex items-center gap-3 mb-4">
-                            <TrendingUp className="h-6 w-6 text-primary-400" />
-                            <h5 className="text-lg font-semibold text-white">Impact</h5>
-                          </div>
-                          <div className="space-y-3">
-                            <div className="flex justify-between items-center">
-                              <span className="text-gray-400 text-sm">Clients Served</span>
-                              <span className="text-white font-semibold">50+</span>
+                          {experience.modules && experience.modules.length > 0 && (
+                            <div>
+                              <h5 className="text-lg font-semibold text-white mb-4">Key Modules Built</h5>
+                              <div className="space-y-2">
+                                {experience.modules.map((module, idx) => (
+                                  <div key={idx} className="flex items-start gap-2">
+                                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary-400 flex-shrink-0" />
+                                    <p className="text-gray-300">{module}</p>
+                                  </div>
+                                ))}
+                              </div>
                             </div>
-                            <div className="flex justify-between items-center">
-                              <span className="text-gray-400 text-sm">Tasks Automated</span>
-                              <span className="text-white font-semibold">1M+</span>
+                          )}
+
+                          {/* Impact Stats */}
+                          <div className="p-6 rounded-lg bg-gradient-to-br from-primary-500/10 to-primary-600/10 border border-primary-500/20">
+                            <div className="flex items-center gap-3 mb-4">
+                              <TrendingUp className="h-6 w-6 text-primary-400" />
+                              <h5 className="text-lg font-semibold text-white">Impact</h5>
                             </div>
-                            <div className="flex justify-between items-center">
-                              <span className="text-gray-400 text-sm">Cost Reduction</span>
-                              <span className="text-white font-semibold">60%</span>
-                            </div>
-                            <div className="flex justify-between items-center">
-                              <span className="text-gray-400 text-sm">Team Size Led</span>
-                              <span className="text-white font-semibold">5</span>
+                            <div className="space-y-3">
+                              <div className="flex justify-between items-center">
+                                <span className="text-gray-400 text-sm">Clients Served</span>
+                                <span className="text-white font-semibold">50+</span>
+                              </div>
+                              <div className="flex justify-between items-center">
+                                <span className="text-gray-400 text-sm">Tasks Automated</span>
+                                <span className="text-white font-semibold">1M+</span>
+                              </div>
+                              <div className="flex justify-between items-center">
+                                <span className="text-gray-400 text-sm">Cost Reduction</span>
+                                <span className="text-white font-semibold">60%</span>
+                              </div>
+                              <div className="flex justify-between items-center">
+                                <span className="text-gray-400 text-sm">Team Size Led</span>
+                                <span className="text-white font-semibold">5</span>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </CardContent>
               </Card>
+                )
+              })()}
             </motion.div>
           ))}
         </motion.div>

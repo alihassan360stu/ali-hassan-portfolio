@@ -51,7 +51,7 @@ const Services = () => {
   }
 
   return (
-    <section id="services" className="section-padding relative overflow-hidden">
+    <section id="services" className="section-padding pb-8 md:pb-12 lg:pb-16 relative overflow-hidden">
       <HeroBackground />
       <div className="container-padding relative z-10">
         <motion.div
