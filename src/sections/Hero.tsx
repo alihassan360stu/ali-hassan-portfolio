@@ -30,7 +30,7 @@ const Hero = () => {
   }
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden py-24 md:py-0">
+    <section className="min-h-[78vh] md:min-h-screen flex items-start md:items-center justify-center relative overflow-hidden pt-24 sm:pt-28 pb-10 sm:pb-16 md:py-0">
       {/* Hero Background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
@@ -193,7 +193,7 @@ const Hero = () => {
 
         {/* Social Links */}
         <motion.div
-          className="flex gap-4 justify-center mb-12"
+          className="hidden sm:flex justify-center gap-4 mb-12"
           variants={itemVariants}
         >
           <motion.a
@@ -228,7 +228,7 @@ const Hero = () => {
 
         {/* Stats */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-10"
+          className="grid grid-cols-4 gap-2 sm:gap-4 md:gap-8 mb-10"
           variants={itemVariants}
         >
           {[
@@ -239,15 +239,15 @@ const Hero = () => {
           ].map((stat, index) => (
             <motion.div
               key={index}
-              className="text-center"
+              className="text-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm px-2.5 py-3 sm:px-4 sm:py-4"
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-1 sm:mb-2">
                 {stat.value}
               </div>
-              <div className="text-sm md:text-base text-gray-400 font-medium">
+              <div className="text-[11px] sm:text-sm md:text-base text-gray-300 font-semibold leading-tight">
                 {stat.label}
               </div>
             </motion.div>
