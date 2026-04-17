@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import MotionOnDesktop from '@/components/MotionOnDesktop'
 import { skills } from '@/data/skills'
 
 const Skills = () => {
@@ -53,72 +53,86 @@ const Skills = () => {
       {/* Content */}
       <div className="container-padding relative z-10">
         {/* Section Header */}
-        <motion.div
+        <MotionOnDesktop
+          as="div"
           className="text-center mb-14"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          motionProps={{
+            variants: containerVariants,
+            initial: 'hidden',
+            whileInView: 'visible',
+            viewport: { once: true, margin: '-100px' },
+          }}
         >
-          <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-5"
-            variants={itemVariants}
-          >
+          <MotionOnDesktop as="h2" className="text-4xl md:text-5xl lg:text-6xl font-bold mb-5" motionProps={{ variants: itemVariants }}>
             <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
               Technical Skills
             </span>
-          </motion.h2>
-          <motion.p
+          </MotionOnDesktop>
+          <MotionOnDesktop
+            as="p"
             className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
-            variants={itemVariants}
+            motionProps={{ variants: itemVariants }}
           >
             A focused toolkit I use to build modern, reliable products.
-          </motion.p>
-        </motion.div>
+          </MotionOnDesktop>
+        </MotionOnDesktop>
 
         {/* Filter Buttons */}
-        <motion.div
+        <MotionOnDesktop
+          as="div"
           className="flex flex-wrap justify-center gap-2.5 mb-12"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          motionProps={{
+            variants: containerVariants,
+            initial: 'hidden',
+            whileInView: 'visible',
+            viewport: { once: true, margin: '-100px' },
+          }}
         >
           {categories.map((category) => (
-            <motion.button
+            <MotionOnDesktop
+              as="button"
               key={category}
+              type="button"
               onClick={() => setFilter(category)}
               className={`px-4 py-2 rounded-full text-sm md:text-base font-semibold transition-all duration-200 ${
                 filter === category
                   ? 'bg-white/15 text-white border border-white/25 backdrop-blur-md'
                   : 'bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10 backdrop-blur-md'
               }`}
-              variants={itemVariants}
-              whileHover={{ y: -1 }}
-              whileTap={{ scale: 0.95 }}
+              motionProps={{
+                variants: itemVariants,
+                whileHover: { y: -1 },
+                whileTap: { scale: 0.95 },
+              }}
             >
               {category.charAt(0).toUpperCase() + category.slice(1)}
-            </motion.button>
+            </MotionOnDesktop>
           ))}
-        </motion.div>
+        </MotionOnDesktop>
 
         {/* Highlights */}
-        <motion.div
+        <MotionOnDesktop
+          as="div"
           className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          motionProps={{
+            variants: containerVariants,
+            initial: 'hidden',
+            whileInView: 'visible',
+            viewport: { once: true, margin: '-100px' },
+          }}
         >
           {highlights.map((h) => (
-            <motion.button
+            <MotionOnDesktop
+              as="button"
               key={h.label}
               type="button"
               onClick={() => setFilter(h.category)}
               className="text-left rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-4 hover:bg-white/8 transition-colors"
-              variants={itemVariants}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.99 }}
+              motionProps={{
+                variants: itemVariants,
+                whileHover: { y: -2 },
+                whileTap: { scale: 0.99 },
+              }}
             >
               <div className="text-xs uppercase tracking-wider text-gray-400 font-semibold">
                 {h.label}
@@ -129,32 +143,34 @@ const Skills = () => {
               <div className="mt-2 text-xs text-gray-400">
                 {h.category}
               </div>
-            </motion.button>
+            </MotionOnDesktop>
           ))}
-        </motion.div>
+        </MotionOnDesktop>
 
         {/* Skills (clean grouped pills) */}
-        <motion.div
+        <MotionOnDesktop
+          as="div"
           className="mx-auto max-w-6xl"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          motionProps={{
+            variants: containerVariants,
+            initial: 'hidden',
+            whileInView: 'visible',
+            viewport: { once: true, margin: '-100px' },
+          }}
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {Object.entries(groupedSkills)
               .sort(([a], [b]) => a.localeCompare(b))
               .map(([category, names]) => (
-                <motion.div
+                <MotionOnDesktop
+                  as="div"
                   key={category}
                   className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 relative overflow-hidden"
-                  variants={itemVariants}
+                  motionProps={{ variants: itemVariants }}
                 >
                   <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-pink-500/40" />
                   <div className="flex items-baseline justify-between gap-3 mb-4">
-                    <h3 className="text-xl md:text-2xl font-semibold text-white">
-                      {category}
-                    </h3>
+                    <h3 className="text-xl md:text-2xl font-semibold text-white">{category}</h3>
                     <span className="text-sm text-gray-400">{names.length}</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -166,10 +182,10 @@ const Skills = () => {
                         </span>
                       ))}
                   </div>
-                </motion.div>
+                </MotionOnDesktop>
               ))}
           </div>
-        </motion.div>
+        </MotionOnDesktop>
       </div>
     </section>
   )

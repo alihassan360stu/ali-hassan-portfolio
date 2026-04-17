@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import MotionOnDesktop from '@/components/MotionOnDesktop'
 import { Mail, Phone, MapPin, Github, Linkedin, Send, MessageSquare } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
@@ -102,40 +102,48 @@ const Contact = () => {
     <section id="contact" className="section-padding pt-8 md:pt-12 lg:pt-16 relative overflow-hidden">
       {/* Content */}
       <div className="container-padding relative z-10">
-        <motion.div
+        <MotionOnDesktop
+          as="div"
           className="text-center mb-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          motionProps={{
+            variants: containerVariants,
+            initial: 'hidden',
+            whileInView: 'visible',
+            viewport: { once: true, margin: '-100px' },
+          }}
         >
-          <motion.h2
+          <MotionOnDesktop
+            as="h2"
             className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent"
-            variants={itemVariants}
           >
             Get In Touch
-          </motion.h2>
-          <motion.div
+          </MotionOnDesktop>
+          <MotionOnDesktop
+            as="div"
             className="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-600 mx-auto rounded-full mb-8"
-            variants={itemVariants}
+            motionProps={{ variants: itemVariants }}
           />
-          <motion.p
+          <MotionOnDesktop
+            as="p"
             className="text-xl text-gray-400 max-w-3xl mx-auto"
-            variants={itemVariants}
+            motionProps={{ variants: itemVariants }}
           >
             Let's discuss your project and how I can help you build scalable automation solutions.
-          </motion.p>
-        </motion.div>
+          </MotionOnDesktop>
+        </MotionOnDesktop>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+          <MotionOnDesktop
+            as="div"
+            motionProps={{
+              variants: containerVariants,
+              initial: 'hidden',
+              whileInView: 'visible',
+              viewport: { once: true, margin: '-100px' },
+            }}
           >
-            <motion.div variants={itemVariants}>
+            <MotionOnDesktop as="div" motionProps={{ variants: itemVariants }}>
               <Card glass>
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-3">
@@ -232,19 +240,22 @@ const Contact = () => {
                   </form>
                 </CardContent>
               </Card>
-            </motion.div>
-          </motion.div>
+            </MotionOnDesktop>
+          </MotionOnDesktop>
 
           {/* Contact Information */}
-          <motion.div
+          <MotionOnDesktop
+            as="div"
             className="space-y-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            motionProps={{
+              variants: containerVariants,
+              initial: 'hidden',
+              whileInView: 'visible',
+              viewport: { once: true, margin: '-100px' },
+            }}
           >
             {/* Contact Details */}
-            <motion.div variants={itemVariants}>
+            <MotionOnDesktop as="div" motionProps={{ variants: itemVariants }}>
               <Card glass>
                 <CardHeader>
                   <CardTitle className="text-white">Contact Information</CardTitle>
@@ -253,20 +264,26 @@ const Contact = () => {
                   {contactInfo.map((info, index) => {
                     const Icon = info.icon
                     return (
-                      <motion.div
+                      <MotionOnDesktop
+                        as="div"
                         key={index}
                         className="flex items-center gap-4"
-                        variants={itemVariants}
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.2 }}
+                        motionProps={{
+                          variants: itemVariants,
+                          whileHover: { scale: 1.02 },
+                          transition: { duration: 0.2 },
+                        }}
                       >
-                        <motion.div
+                        <MotionOnDesktop
+                          as="div"
                           className="w-12 h-12 rounded-full bg-primary-500/20 flex items-center justify-center"
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                          transition={{ duration: 0.2 }}
+                          motionProps={{
+                            whileHover: { scale: 1.1, rotate: 5 },
+                            transition: { duration: 0.2 },
+                          }}
                         >
                           <Icon className="h-6 w-6 text-primary-400" />
-                        </motion.div>
+                        </MotionOnDesktop>
                         <div>
                           <div className="text-sm text-gray-400 mb-1">{info.label}</div>
                           {info.href ? (
@@ -280,15 +297,15 @@ const Contact = () => {
                             <div className="text-white font-medium">{info.value}</div>
                           )}
                         </div>
-                      </motion.div>
+                      </MotionOnDesktop>
                     )
                   })}
                 </CardContent>
               </Card>
-            </motion.div>
+            </MotionOnDesktop>
 
             {/* Social Links */}
-            <motion.div variants={itemVariants}>
+            <MotionOnDesktop as="div" motionProps={{ variants: itemVariants }}>
               <Card glass>
                 <CardHeader>
                   <CardTitle className="text-white">Connect With Me</CardTitle>
@@ -298,31 +315,34 @@ const Contact = () => {
                     {socialLinks.map((social, index) => {
                       const Icon = social.icon
                       return (
-                        <motion.a
+                        <MotionOnDesktop
+                          as="a"
                           key={index}
                           href={social.href}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-3 p-4 rounded-lg bg-gray-800/50 border border-gray-700 hover:bg-gray-800 hover:border-primary-500 transition-all duration-200"
-                          variants={itemVariants}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                          motionProps={{
+                            variants: itemVariants,
+                            whileHover: { scale: 1.05 },
+                            whileTap: { scale: 0.95 },
+                          }}
                         >
                           <Icon className="h-6 w-6 text-primary-400" />
                           <div>
                             <div className="text-white font-medium">{social.label}</div>
                             <div className="text-xs text-gray-400">Connect</div>
                           </div>
-                        </motion.a>
+                        </MotionOnDesktop>
                       )
                     })}
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </MotionOnDesktop>
 
             {/* Response Time */}
-            <motion.div variants={itemVariants}>
+            <MotionOnDesktop as="div" motionProps={{ variants: itemVariants }}>
               <Card glass>
                 <CardContent className="p-6">
                   <div className="text-center">
@@ -338,8 +358,8 @@ const Contact = () => {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
-          </motion.div>
+            </MotionOnDesktop>
+          </MotionOnDesktop>
         </div>
       </div>
     </section>

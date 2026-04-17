@@ -1,8 +1,8 @@
 import React from 'react'
-import { motion, type HTMLMotionProps } from 'framer-motion'
+import MotionOnDesktop from '@/components/MotionOnDesktop'
 import { cn } from '@/utils/cn'
 
-interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'ref'> {
+interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'ref'> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
   children: React.ReactNode
@@ -28,35 +28,41 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       lg: 'px-6 py-3 text-lg'
     }
 
-    const { disabled, ...motionProps } = props
-    
+    const { disabled, ...rest } = props
+
     const buttonContent = (
-      <motion.button
+      <MotionOnDesktop
+        as="button"
         className={cn(baseStyles, variants[variant], sizes[size], className)}
-        ref={ref}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        transition={{ duration: 0.2 }}
+        ref={ref as any}
         disabled={disabled}
-        {...motionProps}
+        motionProps={{
+          whileHover: { scale: 1.02 },
+          whileTap: { scale: 0.98 },
+          transition: { duration: 0.2 },
+        }}
+        {...rest}
       >
         {children}
-      </motion.button>
+      </MotionOnDesktop>
     )
 
     if (href) {
       return (
-        <motion.a
+        <MotionOnDesktop
+          as="a"
           href={href}
           target={target}
           rel={rel}
           className={cn(baseStyles, variants[variant], sizes[size], className)}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={{ duration: 0.2 }}
+          motionProps={{
+            whileHover: { scale: 1.02 },
+            whileTap: { scale: 0.98 },
+            transition: { duration: 0.2 },
+          }}
         >
           {children}
-        </motion.a>
+        </MotionOnDesktop>
       )
     }
 
