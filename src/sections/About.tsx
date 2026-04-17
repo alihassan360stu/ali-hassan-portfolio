@@ -1,9 +1,10 @@
 'use client'
 
 import React from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { useReducedMotion } from 'framer-motion'
 import { Award, Briefcase, Users, Zap, CheckCircle, Target, Lightbulb } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/Card'
+import MotionOnDesktop from '@/components/MotionOnDesktop'
 import { personalInfo } from '@/data/personal'
 
 const About = () => {
@@ -67,44 +68,60 @@ const About = () => {
       {/* Content */}
       <div className="container-padding relative z-10">
         {/* Section Header */}
-        <motion.div
+        <MotionOnDesktop
+          as="div"
           className="text-center mb-10 sm:mb-12 md:mb-14"
-          variants={motionEnabled ? containerVariants : undefined}
-          initial={motionEnabled ? 'hidden' : false}
-          whileInView={motionEnabled ? 'visible' : undefined}
-          viewport={motionEnabled ? { once: true, margin: '-100px' } : undefined}
+          motionProps={
+            motionEnabled
+              ? {
+                  variants: containerVariants,
+                  initial: 'hidden',
+                  whileInView: 'visible',
+                  viewport: { once: true, margin: '-100px' },
+                }
+              : undefined
+          }
         >
-          <motion.h2
+          <MotionOnDesktop
+            as="h2"
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-5 sm:mb-6"
-            variants={motionEnabled ? itemVariants : undefined}
           >
             <span className="bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
               About Me
             </span>
-          </motion.h2>
-          <motion.div
+          </MotionOnDesktop>
+          <MotionOnDesktop
+            as="div"
             className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"
-            variants={motionEnabled ? itemVariants : undefined}
+            motionProps={motionEnabled ? { variants: itemVariants } : undefined}
           />
-          <motion.p
+          <MotionOnDesktop
+            as="p"
             className="text-base sm:text-lg md:text-xl text-gray-300 sm:text-gray-400 max-w-3xl mx-auto mt-5 sm:mt-6 leading-relaxed"
-            variants={motionEnabled ? itemVariants : undefined}
+            motionProps={motionEnabled ? { variants: itemVariants } : undefined}
           >
             Passionate automation engineer and full-stack developer with expertise in building scalable solutions
-          </motion.p>
-        </motion.div>
+          </MotionOnDesktop>
+        </MotionOnDesktop>
 
         {/* Professional Summary */}
-        <motion.div
+        <MotionOnDesktop
+          as="div"
           className="mb-10 sm:mb-12 md:mb-14"
-          variants={motionEnabled ? containerVariants : undefined}
-          initial={motionEnabled ? 'hidden' : false}
-          whileInView={motionEnabled ? 'visible' : undefined}
-          viewport={motionEnabled ? { once: true, margin: '-100px' } : undefined}
+          motionProps={
+            motionEnabled
+              ? {
+                  variants: containerVariants,
+                  initial: 'hidden',
+                  whileInView: 'visible',
+                  viewport: { once: true, margin: '-100px' },
+                }
+              : undefined
+          }
         >
           <Card glass className="p-6 sm:p-8 md:p-12 overflow-hidden">
             <CardContent className="space-y-8 sm:space-y-10">
-              <motion.div variants={motionEnabled ? itemVariants : undefined} className="relative">
+              <MotionOnDesktop as="div" className="relative" motionProps={motionEnabled ? { variants: itemVariants } : undefined}>
                 <div className="absolute inset-0 -m-12 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5" />
                 <div className="relative grid lg:grid-cols-2 gap-6 sm:gap-10">
                   <div>
@@ -141,10 +158,10 @@ const About = () => {
                     </ul>
                   </div>
                 </div>
-              </motion.div>
+              </MotionOnDesktop>
 
               {/* Expertise Areas */}
-              <motion.div variants={motionEnabled ? itemVariants : undefined}>
+              <MotionOnDesktop as="div" motionProps={motionEnabled ? { variants: itemVariants } : undefined}>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-5 sm:mb-8">
                   Expertise Focus
                 </h3>
@@ -152,11 +169,18 @@ const About = () => {
                   {expertise.map((item, index) => {
                     const Icon = item.icon
                     return (
-                      <motion.div
+                      <MotionOnDesktop
+                        as="div"
                         key={index}
-                        variants={motionEnabled ? itemVariants : undefined}
-                        whileHover={motionEnabled ? { scale: 1.05 } : undefined}
-                        transition={motionEnabled ? { duration: 0.2 } : { duration: 0 }}
+                        motionProps={
+                          motionEnabled
+                            ? {
+                                variants: itemVariants,
+                                whileHover: { scale: 1.05 },
+                                transition: { duration: 0.2 },
+                              }
+                            : undefined
+                        }
                       >
                         <div
                           className={
@@ -166,13 +190,20 @@ const About = () => {
                         >
                           <div className="h-full rounded-3xl bg-gray-900/35 backdrop-blur-xl border border-white/10 px-5 py-6 sm:px-6">
                             <div className="flex items-start gap-4">
-                              <motion.div
+                              <MotionOnDesktop
+                                as="div"
                                 className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-lg shadow-black/30 ring-1 ring-white/15`}
-                                whileHover={motionEnabled ? { scale: 1.08, rotate: 4 } : undefined}
-                                transition={motionEnabled ? { duration: 0.2 } : { duration: 0 }}
+                                motionProps={
+                                  motionEnabled
+                                    ? {
+                                        whileHover: { scale: 1.08, rotate: 4 },
+                                        transition: { duration: 0.2 },
+                                      }
+                                    : undefined
+                                }
                               >
                                 <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
-                              </motion.div>
+                              </MotionOnDesktop>
 
                               <div className="flex-1">
                                 <h4 className="text-lg sm:text-xl font-semibold text-white leading-tight">
@@ -187,34 +218,41 @@ const About = () => {
                             </p>
                           </div>
                         </div>
-                      </motion.div>
+                      </MotionOnDesktop>
                     )
                   })}
                 </div>
-              </motion.div>
+              </MotionOnDesktop>
             </CardContent>
           </Card>
-        </motion.div>
+        </MotionOnDesktop>
 
 
 
         {/* Why Work With Me */}
-        <motion.div
-          variants={motionEnabled ? containerVariants : undefined}
-          initial={motionEnabled ? 'hidden' : false}
-          whileInView={motionEnabled ? 'visible' : undefined}
-          viewport={motionEnabled ? { once: true, margin: '-100px' } : undefined}
+        <MotionOnDesktop
+          as="div"
+          motionProps={
+            motionEnabled
+              ? {
+                  variants: containerVariants,
+                  initial: 'hidden',
+                  whileInView: 'visible',
+                  viewport: { once: true, margin: '-100px' },
+                }
+              : undefined
+          }
         >
           <Card glass className="p-8 md:p-12">
             <CardContent className="space-y-8">
-              <motion.div variants={motionEnabled ? itemVariants : undefined} className="text-center">
+              <MotionOnDesktop as="div" className="text-center" motionProps={motionEnabled ? { variants: itemVariants } : undefined}>
                 <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
                   Why Work With Me
                 </h3>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                   I bring a unique combination of technical expertise and business understanding to deliver exceptional results
                 </p>
-              </motion.div>
+              </MotionOnDesktop>
               
               <div className="grid md:grid-cols-3 gap-8">
                 {[
@@ -237,32 +275,46 @@ const About = () => {
                     description: 'Regular updates, clear trade-offs, and fast iteration cycles.'
                   }
                 ].map((item, index) => (
-                  <motion.div
+                  <MotionOnDesktop
+                    as="div"
                     key={index}
                     className="text-center"
-                    variants={motionEnabled ? itemVariants : undefined}
-                    whileHover={motionEnabled ? { scale: 1.05 } : undefined}
-                    transition={motionEnabled ? { duration: 0.2 } : { duration: 0 }}
+                    motionProps={
+                      motionEnabled
+                        ? {
+                            variants: itemVariants,
+                            whileHover: { scale: 1.05 },
+                            transition: { duration: 0.2 },
+                          }
+                        : undefined
+                    }
                   >
-                    <motion.div
+                    <MotionOnDesktop
+                      as="div"
                       className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center`}
-                      whileHover={motionEnabled ? { scale: 1.1, rotate: 5 } : undefined}
-                      transition={motionEnabled ? { duration: 0.2 } : { duration: 0 }}
+                      motionProps={
+                        motionEnabled
+                          ? {
+                              whileHover: { scale: 1.1, rotate: 5 },
+                              transition: { duration: 0.2 },
+                            }
+                          : undefined
+                      }
                     >
                       <item.icon className="h-10 w-10 text-white" />
-                    </motion.div>
+                    </MotionOnDesktop>
                     <h4 className="text-xl font-semibold text-white mb-3">
                       {item.title}
                     </h4>
                     <p className="text-gray-400 leading-relaxed">
                       {item.description}
                     </p>
-                  </motion.div>
+                  </MotionOnDesktop>
                 ))}
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </MotionOnDesktop>
       </div>
     </section>
   )

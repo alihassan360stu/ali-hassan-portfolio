@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
+import MotionOnDesktop from '@/components/MotionOnDesktop'
 import { 
   Cloud, 
   GitBranch, 
@@ -52,52 +52,63 @@ const Services = () => {
   return (
     <section id="services" className="section-padding pb-8 md:pb-12 lg:pb-16 relative overflow-hidden">
       <div className="container-padding relative z-10">
-        <motion.div
+        <MotionOnDesktop
+          as="div"
           className="text-center mb-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          motionProps={{
+            variants: containerVariants,
+            initial: 'hidden',
+            whileInView: 'visible',
+            viewport: { once: true, margin: '-100px' },
+          }}
         >
-          <motion.h2
+          <MotionOnDesktop
+            as="h2"
             className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent"
-            variants={itemVariants}
           >
             Services
-          </motion.h2>
-          <motion.div
+          </MotionOnDesktop>
+          <MotionOnDesktop
+            as="div"
             className="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-600 mx-auto rounded-full mb-8"
-            variants={itemVariants}
+            motionProps={{ variants: itemVariants }}
           />
-          <motion.p
+          <MotionOnDesktop
+            as="p"
             className="text-xl text-gray-400 max-w-3xl mx-auto"
-            variants={itemVariants}
+            motionProps={{ variants: itemVariants }}
           >
             Comprehensive services for building scalable automation systems and high-performance web applications.
-          </motion.p>
-        </motion.div>
+          </MotionOnDesktop>
+        </MotionOnDesktop>
 
         {/* Services Grid */}
-        <motion.div
+        <MotionOnDesktop
+          as="div"
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          motionProps={{
+            variants: containerVariants,
+            initial: 'hidden',
+            whileInView: 'visible',
+            viewport: { once: true, margin: '-100px' },
+          }}
         >
           {services.map((service, index) => {
             const Icon = iconMap[service.icon as keyof typeof iconMap] || Cloud
             return (
-              <motion.div key={service.id} variants={itemVariants}>
+              <MotionOnDesktop as="div" key={service.id} motionProps={{ variants: itemVariants }}>
                 <Card glass className="h-full hover:shadow-2xl transition-all duration-300">
                   <CardHeader>
-                    <motion.div
+                    <MotionOnDesktop
+                      as="div"
                       className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center mb-4"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.2 }}
+                      motionProps={{
+                        whileHover: { scale: 1.1, rotate: 5 },
+                        transition: { duration: 0.2 },
+                      }}
                     >
                       <Icon className="h-8 w-8 text-white" />
-                    </motion.div>
+                    </MotionOnDesktop>
                     <CardTitle className="text-white text-xl mb-3">
                       {service.title}
                     </CardTitle>
@@ -111,16 +122,19 @@ const Services = () => {
                       <h4 className="text-sm font-semibold text-white mb-3">What's Included</h4>
                       <div className="space-y-2">
                         {service.features.map((feature, idx) => (
-                          <motion.div
+                          <MotionOnDesktop
+                            as="div"
                             key={idx}
                             className="flex items-start gap-3"
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: idx * 0.1 }}
+                            motionProps={{
+                              initial: { opacity: 0, x: -20 },
+                              animate: { opacity: 1, x: 0 },
+                              transition: { delay: idx * 0.1 },
+                            }}
                           >
                             <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
                             <span className="text-gray-300 text-sm">{feature}</span>
-                          </motion.div>
+                          </MotionOnDesktop>
                         ))}
                       </div>
                     </div>
@@ -133,20 +147,23 @@ const Services = () => {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </MotionOnDesktop>
             )
           })}
-        </motion.div>
+        </MotionOnDesktop>
 
         {/* Service Process */}
-        <motion.div
+        <MotionOnDesktop
+          as="div"
           className="mt-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          motionProps={{
+            variants: containerVariants,
+            initial: 'hidden',
+            whileInView: 'visible',
+            viewport: { once: true, margin: '-100px' },
+          }}
         >
-          <motion.div variants={itemVariants}>
+          <MotionOnDesktop as="div" motionProps={{ variants: itemVariants }}>
             <Card glass>
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold text-white mb-8 text-center">
@@ -159,12 +176,15 @@ const Services = () => {
                     { step: '3', title: 'Development', description: 'Building the solution with agile methodology' },
                     { step: '4', title: 'Delivery', description: 'Testing, deployment, and ongoing support' }
                   ].map((process, index) => (
-                    <motion.div
+                    <MotionOnDesktop
+                      as="div"
                       key={index}
                       className="text-center"
-                      variants={itemVariants}
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.2 }}
+                      motionProps={{
+                        variants: itemVariants,
+                        whileHover: { scale: 1.05 },
+                        transition: { duration: 0.2 },
+                      }}
                     >
                       <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white font-bold text-lg">
                         {process.step}
@@ -175,23 +195,26 @@ const Services = () => {
                       <p className="text-gray-400 text-sm">
                         {process.description}
                       </p>
-                    </motion.div>
+                    </MotionOnDesktop>
                   ))}
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
-        </motion.div>
+          </MotionOnDesktop>
+        </MotionOnDesktop>
 
         {/* CTA Section */}
-        <motion.div
+        <MotionOnDesktop
+          as="div"
           className="mt-16 text-center"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          motionProps={{
+            variants: containerVariants,
+            initial: 'hidden',
+            whileInView: 'visible',
+            viewport: { once: true, margin: '-100px' },
+          }}
         >
-          <motion.div variants={itemVariants}>
+          <MotionOnDesktop as="div" motionProps={{ variants: itemVariants }}>
             <Card glass>
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold text-white mb-4">
@@ -220,8 +243,8 @@ const Services = () => {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
-        </motion.div>
+          </MotionOnDesktop>
+        </MotionOnDesktop>
       </div>
     </section>
   )
