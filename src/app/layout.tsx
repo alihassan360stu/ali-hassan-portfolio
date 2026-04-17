@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
+import HeroBackground from '@/components/HeroBackground'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -75,9 +76,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body className={`${inter.className} antialiased`}>
-        <div id="root" className="min-h-screen bg-gray-950 text-gray-100">
+        <div id="root" className="relative min-h-screen bg-gray-950 text-gray-100 overflow-hidden">
+          <div className="fixed inset-x-0 bottom-0 top-16 z-0 pointer-events-none">
+            <HeroBackground />
+          </div>
           <Header />
-          <main className="pt-16">
+          <main className="relative z-10 pt-16">
             {children}
           </main>
         </div>

@@ -50,72 +50,6 @@ const Hero = () => {
 
   return (
     <section className="min-h-[54vh] md:min-h-screen flex items-start md:items-center justify-center relative overflow-hidden pt-10 sm:pt-12 pb-8 sm:pb-12 md:py-0">
-      {/* Hero Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
-          {/* Animated gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10" />
-          
-          {/* Floating orbs */}
-          <motion.div
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          <motion.div
-            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.1, 1],
-              opacity: [0.5, 0.3, 0.5],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-          />
-          
-          {/* Additional floating elements */}
-          <motion.div
-            className="absolute top-3/4 right-1/4 w-64 h-64 bg-green-500/10 rounded-full blur-2xl"
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1,
-            }}
-          />
-          <motion.div
-            className="absolute bottom-1/3 left-1/3 w-48 h-48 bg-yellow-500/10 rounded-full blur-xl"
-            animate={{
-              scale: [1, 1.4, 1],
-              opacity: [0.2, 0.3, 0.2],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0.5,
-            }}
-          />
-        </div>
-
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      </div>
-
       {/* Content */}
       <motion.div
         className="container-padding relative z-10 text-center"
@@ -311,7 +245,7 @@ const Hero = () => {
 
         {/* Stats */}
         <motion.div
-          className="grid grid-cols-4 gap-2 sm:gap-4 md:gap-8 mb-6 md:mb-10"
+          className="grid grid-cols-4 gap-2 sm:gap-4 md:gap-8 mb-3 md:mb-3"
           variants={itemVariants}
         >
           {[
@@ -339,7 +273,7 @@ const Hero = () => {
 
         {/* Scroll Indicator */}
         <motion.div
-          className="flex justify-center mt-1 pointer-events-none"
+          className="flex justify-center mb-3 pointer-events-none"
           animate={{
             y: [0, 10, 0],
           }}

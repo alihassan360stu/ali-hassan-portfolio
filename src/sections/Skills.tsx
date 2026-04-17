@@ -3,7 +3,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { skills } from '@/data/skills'
-import HeroBackground from '@/components/HeroBackground'
 
 const Skills = () => {
   const [filter, setFilter] = useState<string>('all')
@@ -51,7 +50,6 @@ const Skills = () => {
 
   return (
     <section id="skills" className="section-padding relative overflow-hidden scroll-mt-24 md:scroll-mt-28">
-      <HeroBackground />
       {/* Content */}
       <div className="container-padding relative z-10">
         {/* Section Header */}

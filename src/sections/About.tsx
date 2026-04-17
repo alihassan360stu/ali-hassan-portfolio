@@ -5,7 +5,6 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Award, Briefcase, Users, Zap, CheckCircle, Target, Lightbulb } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/Card'
 import { personalInfo } from '@/data/personal'
-import HeroBackground from '@/components/HeroBackground'
 
 const About = () => {
   const reducedMotion = useReducedMotion()
@@ -54,33 +53,6 @@ const About = () => {
     }
   ]
 
-  const stats = [
-    {
-      icon: Briefcase,
-      label: 'Years Experience',
-      value: '4+',
-      description: 'In automation & web development'
-    },
-    {
-      icon: Users,
-      label: 'Enterprise Clients',
-      value: '50+',
-      description: 'Successfully served'
-    },
-    {
-      icon: Zap,
-      label: 'Projects Completed',
-      value: '100+',
-      description: 'Automation solutions delivered'
-    },
-    {
-      icon: Award,
-      label: 'Success Rate',
-      value: '99.5%',
-      description: 'Client satisfaction'
-    }
-  ]
-
   const highlights = [
     'Automation systems that reduce manual work and improve reliability',
     'Clean, scalable full‑stack apps with modern UI and performance focus',
@@ -92,7 +64,6 @@ const About = () => {
 
   return (
     <section id="about" className="section-padding relative overflow-hidden pb-12 md:pb-16 scroll-mt-24 md:scroll-mt-28">
-      <HeroBackground />
       {/* Content */}
       <div className="container-padding relative z-10">
         {/* Section Header */}
@@ -187,23 +158,35 @@ const About = () => {
                         whileHover={motionEnabled ? { scale: 1.05 } : undefined}
                         transition={motionEnabled ? { duration: 0.2 } : { duration: 0 }}
                       >
-                        <Card glass className="h-full p-5 sm:p-6">
-                          <CardContent className="space-y-4">
-                            <motion.div
-                              className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center`}
-                              whileHover={motionEnabled ? { scale: 1.1, rotate: 5 } : undefined}
-                              transition={motionEnabled ? { duration: 0.2 } : { duration: 0 }}
-                            >
-                              <Icon className="h-7 w-7 sm:h-8 sm:w-8 text-white" />
-                            </motion.div>
-                            <h4 className="text-xl font-semibold text-white mb-3">
-                              {item.title}
-                            </h4>
-                            <p className="text-gray-400 leading-relaxed">
+                        <div
+                          className={
+                            'group relative h-full rounded-3xl p-[1px] bg-gradient-to-br from-white/10 via-white/5 to-white/10 ' +
+                            'hover:from-blue-500/25 hover:via-purple-500/15 hover:to-pink-500/20 transition-colors duration-300'
+                          }
+                        >
+                          <div className="h-full rounded-3xl bg-gray-900/35 backdrop-blur-xl border border-white/10 px-5 py-6 sm:px-6">
+                            <div className="flex items-start gap-4">
+                              <motion.div
+                                className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-lg shadow-black/30 ring-1 ring-white/15`}
+                                whileHover={motionEnabled ? { scale: 1.08, rotate: 4 } : undefined}
+                                transition={motionEnabled ? { duration: 0.2 } : { duration: 0 }}
+                              >
+                                <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
+                              </motion.div>
+
+                              <div className="flex-1">
+                                <h4 className="text-lg sm:text-xl font-semibold text-white leading-tight">
+                                  {item.title}
+                                </h4>
+                                <div className="mt-3 h-px w-full bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
+                              </div>
+                            </div>
+
+                            <p className="mt-4 text-sm sm:text-base text-gray-300/90 leading-relaxed">
                               {item.description}
                             </p>
-                          </CardContent>
-                        </Card>
+                          </div>
+                        </div>
                       </motion.div>
                     )
                   })}
@@ -213,41 +196,7 @@ const About = () => {
           </Card>
         </motion.div>
 
-        {/* Stats Grid */}
-        <motion.div
-          className="mb-14 hidden md:block"
-          variants={motionEnabled ? containerVariants : undefined}
-          initial={motionEnabled ? 'hidden' : false}
-          whileInView={motionEnabled ? 'visible' : undefined}
-          viewport={motionEnabled ? { once: true, margin: '-100px' } : undefined}
-        >
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {stats.map((stat, index) => (
-              <motion.div key={index} variants={motionEnabled ? itemVariants : undefined}>
-                <Card glass className="h-full p-6 text-center">
-                  <CardContent className="space-y-4">
-                    <motion.div
-                      className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-600/20 flex items-center justify-center"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <stat.icon className="h-8 w-8 text-blue-400" />
-                    </motion.div>
-                    <div className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                      {stat.value}
-                    </div>
-                    <div className="text-lg font-semibold text-white">
-                      {stat.label}
-                    </div>
-                    <div className="text-sm text-gray-400">
-                      {stat.description}
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+
 
         {/* Why Work With Me */}
         <motion.div

@@ -14,7 +14,6 @@ import {
   Sparkles,
   Workflow
 } from 'lucide-react'
-import HeroBackground from '@/components/HeroBackground'
 import Modal from '@/components/ui/Modal'
 import ProjectMediaViewer from '@/components/ProjectMediaViewer'
 import { workProjects, type ProjectCategory, type WorkProject } from '@/data/projectsWork'
@@ -116,8 +115,6 @@ const ProjectsWork = () => {
 
   return (
     <section id="projects" className="section-padding scroll-mt-20 md:scroll-mt-28 relative overflow-hidden">
-      <HeroBackground />
-
       <div className="container-padding relative z-10">
         <motion.div
           className="text-center mb-10"
