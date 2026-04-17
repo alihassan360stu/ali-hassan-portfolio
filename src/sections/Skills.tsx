@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import MotionOnDesktop from '@/components/MotionOnDesktop'
 import { Blocks, Bot, Code2, Database, ShieldCheck, Wrench } from 'lucide-react'
 import { skills } from '@/data/skills'
 
@@ -115,35 +116,36 @@ const Skills = () => {
       {/* Content */}
       <div className="container-padding relative z-10">
         {/* Section Header */}
-        <motion.div
+        <MotionOnDesktop
+          as="div"
           className="text-center mb-14"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          motionProps={{
+            variants: containerVariants,
+            initial: 'hidden',
+            whileInView: 'visible',
+            viewport: { once: true, margin: '-100px' },
+          }}
         >
-          <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-5"
-            variants={itemVariants}
-          >
+          <MotionOnDesktop as="h2" className="text-4xl md:text-5xl lg:text-6xl font-bold mb-5" motionProps={{ variants: itemVariants }}>
             <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
               Technical Skills
             </span>
-          </motion.h2>
-          <motion.p
+          </MotionOnDesktop>
+          <MotionOnDesktop
+            as="p"
             className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
-            variants={itemVariants}
+            motionProps={{ variants: itemVariants }}
           >
             A focused toolkit I use to build modern, reliable products.
-          </motion.p>
-        </motion.div>
+          </MotionOnDesktop>
+        </MotionOnDesktop>
 
         <motion.div
           className="space-y-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-100px' }}
         >
           {/* Category Bar */}
           <motion.div
@@ -195,12 +197,6 @@ const Skills = () => {
                         ? `Showing ${skills.length} skills across all categories`
                         : `Showing ${categoryCounts[filter] ?? 0} skills`}
                     </div>
-                  </div>
-                  <div className="hidden sm:flex items-center gap-2">
-                    <span className="text-xs text-gray-400">Tip:</span>
-                    <span className="text-xs text-gray-200 border border-white/10 bg-white/5 rounded-full px-2 py-1">
-                      Use the left panel to filter
-                    </span>
                   </div>
                 </div>
 

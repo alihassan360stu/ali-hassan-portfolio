@@ -1,5 +1,5 @@
 import React from 'react'
-import { motion } from 'framer-motion'
+import MotionOnDesktop from '@/components/MotionOnDesktop'
 import { cn } from '@/utils/cn'
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -21,15 +21,19 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       : 'border-gray-200 dark:border-gray-800'
 
     return (
-      <motion.div
+      <MotionOnDesktop
+        as="div"
         className={cn(baseStyles, hoverStyles, glassStyles, className)}
         ref={ref}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        motionProps={{
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.5 },
+        }}
+        {...props}
       >
         {children}
-      </motion.div>
+      </MotionOnDesktop>
     )
   }
 )
