@@ -7,12 +7,10 @@ import {
   ExternalLink,
   Github,
   Image as ImageIcon,
-  Layers,
   Lock,
   PlayCircle,
   Shield,
   Sparkles,
-  User,
   Workflow
 } from 'lucide-react'
 import HeroBackground from '@/components/HeroBackground'
@@ -342,8 +340,8 @@ const ProjectsWork = () => {
           title={selected?.title}
           maxWidthClassName="max-w-6xl"
         >
-          <div className="space-y-6">
-            <div className="rounded-2xl border border-white/12 bg-white/6 overflow-hidden">
+          <div className="space-y-8">
+            <div className="rounded-2xl border border-white/15 bg-white/7 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] overflow-hidden">
               <div className="p-6 sm:p-8 bg-gradient-to-r from-blue-500/16 via-purple-500/16 to-transparent">
                 <div className="flex flex-col gap-5">
                   <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5">
@@ -352,116 +350,9 @@ const ProjectsWork = () => {
                         <Sparkles className="h-4 w-4 text-purple-200" />
                         Case Study
                       </div>
-                      <h3 className="mt-2 text-2xl sm:text-3xl font-semibold text-white leading-tight">
+                      <h3 className="mt-2 text-3xl sm:text-4xl font-semibold text-white leading-tight tracking-tight">
                         {selected?.title}
                       </h3>
-                      <div className="mt-3 flex flex-wrap items-center gap-2">
-                        {selected?.vip && (
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border border-purple-500/25 bg-purple-500/15 text-purple-200">
-                            VIP
-                          </span>
-                        )}
-                        {selected?.experienceLevel && (
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border border-white/20 bg-white/10 text-white">
-                            Experience: {selected.experienceLevel}
-                          </span>
-                        )}
-                        {selected?.badge === 'Confidential' && (
-                          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold border border-white/20 bg-white/10 text-white">
-                            <Shield className="h-4 w-4" />
-                            Confidential
-                          </span>
-                        )}
-                        {selected?.category && (
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border border-white/15 bg-white/8 text-gray-100">
-                            {selected.category === 'client'
-                              ? 'Client Work'
-                              : selected.category === 'automation'
-                              ? 'Automation'
-                              : 'Personal'}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    {selected?.badge === 'Confidential' && (
-                      <div className="rounded-2xl border border-white/12 bg-white/6 px-5 py-4 text-sm text-gray-100 max-w-2xl">
-                        <div className="flex items-start gap-3">
-                          <Lock className="h-5 w-5 text-gray-200 mt-0.5" />
-                          <div className="leading-relaxed">
-                            This is confidential client work. Live URLs, screenshots, and source code cannot be shared.
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <div className="rounded-2xl border border-white/12 bg-white/6 px-5 py-4">
-                      <div className="flex items-center gap-2 text-sm font-semibold text-white">
-                        <User className="h-4 w-4 text-gray-200" />
-                        Role
-                      </div>
-                      <div className="mt-2 text-sm text-gray-200 leading-relaxed">
-                        {selected?.role ?? '—'}
-                      </div>
-                    </div>
-                    <div className="rounded-2xl border border-white/12 bg-white/6 px-5 py-4">
-                      <div className="flex items-center gap-2 text-sm font-semibold text-white">
-                        <Layers className="h-4 w-4 text-gray-200" />
-                        Stack
-                      </div>
-                      <div className="mt-2 text-sm text-gray-200 leading-relaxed">
-                        {selected?.techStack?.length ? `${selected.techStack.length} technologies` : '—'}
-                      </div>
-                    </div>
-                    <div className="rounded-2xl border border-white/12 bg-white/6 px-5 py-4">
-                      <div className="flex items-center gap-2 text-sm font-semibold text-white">
-                        <CheckCircle2 className="h-4 w-4 text-gray-200" />
-                        Scope
-                      </div>
-                      <div className="mt-2 text-sm text-gray-200 leading-relaxed">
-                        {selected?.features?.length ? `${selected.features.length} features` : '—'}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    <div className="rounded-2xl border border-white/12 bg-white/6 px-4 py-3">
-                      <div className="text-xs text-gray-300">Responsibilities</div>
-                      <div className="mt-1 text-sm font-semibold text-white">
-                        {selected?.contributions?.length ? `${selected.contributions.length} items` : '—'}
-                      </div>
-                    </div>
-                    <div className="rounded-2xl border border-white/12 bg-white/6 px-4 py-3">
-                      <div className="text-xs text-gray-300">Media</div>
-                      <div className="mt-1 text-sm font-semibold text-white">
-                        {selected?.media?.screenshots?.length
-                          ? `${selected.media.screenshots.length} screenshots`
-                          : selected?.media?.videoUrl
-                          ? 'Video demo'
-                          : selected?.badge === 'Confidential'
-                          ? 'Restricted'
-                          : '—'}
-                      </div>
-                    </div>
-                    <div className="rounded-2xl border border-white/12 bg-white/6 px-4 py-3">
-                      <div className="text-xs text-gray-300">Category</div>
-                      <div className="mt-1 text-sm font-semibold text-white">
-                        {selected?.category === 'client'
-                          ? 'Client Work'
-                          : selected?.category === 'automation'
-                          ? 'Automation'
-                          : selected?.category === 'personal'
-                          ? 'Personal'
-                          : '—'}
-                      </div>
-                    </div>
-                    <div className="rounded-2xl border border-white/12 bg-white/6 px-4 py-3">
-                      <div className="text-xs text-gray-300">Level</div>
-                      <div className="mt-1 text-sm font-semibold text-white">
-                        {selected?.experienceLevel ?? '—'}
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -469,8 +360,14 @@ const ProjectsWork = () => {
 
               {selected?.description && (
                 <div className="p-6 sm:p-8 border-t border-white/10">
-                  <h4 className="text-lg font-semibold text-white">Overview</h4>
-                  <p className="mt-3 text-gray-200 leading-relaxed text-[15px] sm:text-base">
+                  <div className="flex items-end justify-between gap-4">
+                    <div>
+                      <h4 className="text-xl font-semibold text-white tracking-tight">Overview</h4>
+                      <p className="mt-1 text-sm text-gray-300">Context, purpose, and what was delivered.</p>
+                    </div>
+                    <div className="hidden sm:block h-px w-24 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+                  </div>
+                  <p className="mt-4 text-gray-100/90 leading-relaxed text-base sm:text-[17px]">
                     {selected.description}
                   </p>
                 </div>
@@ -479,10 +376,10 @@ const ProjectsWork = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
               <div className="lg:col-span-7 space-y-6">
-                <div className="rounded-2xl border border-white/12 bg-white/6 p-6 sm:p-8">
+                <div className="rounded-2xl border border-white/15 bg-white/7 p-6 sm:p-8">
                   <div className="flex items-end justify-between gap-4">
                     <div>
-                      <h4 className="text-lg font-semibold text-white">Media</h4>
+                      <h4 className="text-xl font-semibold text-white tracking-tight">Media</h4>
                       <p className="mt-2 text-sm text-gray-300">Screenshots and demos (when shareable). Click an image to view fullscreen.</p>
                     </div>
                     {selected?.media?.screenshots?.length ? (
@@ -498,7 +395,7 @@ const ProjectsWork = () => {
                         videoUrl={selected?.media?.videoUrl}
                       />
                     ) : (
-                      <div className="rounded-2xl border border-white/12 bg-white/5 p-6">
+                      <div className="rounded-2xl border border-white/15 bg-white/6 p-6">
                         <div className="flex items-start gap-4">
                           <div className="h-10 w-10 rounded-xl border border-white/12 bg-white/6 flex items-center justify-center">
                             <Shield className="h-5 w-5 text-gray-200" />
@@ -518,11 +415,17 @@ const ProjectsWork = () => {
                 </div>
 
                 {selected?.contributions?.length ? (
-                  <div className="rounded-2xl border border-white/12 bg-white/6 p-6 sm:p-8">
-                    <h4 className="text-lg font-semibold text-white">My Responsibilities</h4>
-                    <ul className="mt-5 space-y-3">
+                  <div className="rounded-2xl border border-white/15 bg-white/7 p-6 sm:p-8">
+                    <div className="flex items-end justify-between gap-4">
+                      <div>
+                        <h4 className="text-xl font-semibold text-white tracking-tight">My Responsibilities</h4>
+                        <p className="mt-1 text-sm text-gray-300">What I owned end-to-end and delivered.</p>
+                      </div>
+                      <div className="hidden sm:block h-px w-24 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+                    </div>
+                    <ul className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
                       {selected.contributions.map((c) => (
-                        <li key={c} className="text-sm text-gray-200 flex gap-3">
+                        <li key={c} className="text-base text-gray-100/90 flex gap-3">
                           <CheckCircle2 className="h-5 w-5 text-blue-200 mt-0.5 flex-shrink-0" />
                           <span className="leading-relaxed">{c}</span>
                         </li>
@@ -534,11 +437,17 @@ const ProjectsWork = () => {
 
               <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-6 h-fit">
                 {selected?.features?.length ? (
-                  <div className="rounded-2xl border border-white/12 bg-white/6 p-6 sm:p-8">
-                    <h4 className="text-lg font-semibold text-white">Key Features</h4>
-                    <ul className="mt-5 space-y-3">
+                  <div className="rounded-2xl border border-white/15 bg-white/7 p-6 sm:p-8">
+                    <div className="flex items-end justify-between gap-4">
+                      <div>
+                        <h4 className="text-xl font-semibold text-white tracking-tight">Key Features</h4>
+                        <p className="mt-1 text-sm text-gray-300">Capabilities users directly interact with.</p>
+                      </div>
+                      <div className="hidden sm:block h-px w-24 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+                    </div>
+                    <ul className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
                       {selected.features.map((f) => (
-                        <li key={f} className="text-sm text-gray-200 flex gap-3">
+                        <li key={f} className="text-base text-gray-100/90 flex gap-3">
                           <CheckCircle2 className="h-5 w-5 text-emerald-200 mt-0.5 flex-shrink-0" />
                           <span className="leading-relaxed">{f}</span>
                         </li>
@@ -548,8 +457,14 @@ const ProjectsWork = () => {
                 ) : null}
 
                 {selected?.techStack?.length ? (
-                  <div className="rounded-2xl border border-white/12 bg-white/6 p-6 sm:p-8">
-                    <h4 className="text-lg font-semibold text-white">Tech Stack</h4>
+                  <div className="rounded-2xl border border-white/15 bg-white/7 p-6 sm:p-8">
+                    <div className="flex items-end justify-between gap-4">
+                      <div>
+                        <h4 className="text-xl font-semibold text-white tracking-tight">Tech Stack</h4>
+                        <p className="mt-1 text-sm text-gray-300">Tools and frameworks used in production.</p>
+                      </div>
+                      <div className="hidden sm:block h-px w-24 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+                    </div>
                     <div className="mt-5 flex flex-wrap gap-2">
                       {selected.techStack.map((t) => (
                         <span key={t} className="skill-badge">
