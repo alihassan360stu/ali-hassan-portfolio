@@ -15,6 +15,7 @@ const Contact = () => {
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const isFormDisabled = true
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -152,6 +153,9 @@ const Contact = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
+                  <div className="mb-5 rounded-xl border border-amber-500/25 bg-amber-500/10 px-4 py-3 text-amber-200">
+                    Contact form is temporarily disabled. Please use email or LinkedIn for now.
+                  </div>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
@@ -165,6 +169,7 @@ const Contact = () => {
                           value={formData.name}
                           onChange={handleInputChange}
                           required
+                          disabled={isFormDisabled}
                           className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
                           placeholder="Your Name"
                         />
@@ -180,6 +185,7 @@ const Contact = () => {
                           value={formData.email}
                           onChange={handleInputChange}
                           required
+                          disabled={isFormDisabled}
                           className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
                           placeholder="your@email.com"
                         />
@@ -197,6 +203,7 @@ const Contact = () => {
                         value={formData.subject}
                         onChange={handleInputChange}
                         required
+                        disabled={isFormDisabled}
                         className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
                         placeholder="Project Discussion"
                       />
@@ -212,6 +219,7 @@ const Contact = () => {
                         value={formData.message}
                         onChange={handleInputChange}
                         required
+                        disabled={isFormDisabled}
                         rows={6}
                         className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 resize-none"
                         placeholder="Tell me about your project..."
@@ -222,7 +230,7 @@ const Contact = () => {
                       type="submit"
                       variant="primary"
                       size="lg"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || isFormDisabled}
                       className="w-full"
                     >
                       {isSubmitting ? (
