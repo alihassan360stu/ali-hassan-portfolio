@@ -29,12 +29,23 @@ const Modal: React.FC<ModalProps> = ({
   useEffect(() => {
     if (!open) return
 
+    const previousOverflow = document.body.style.overflow
+    const previousPaddingRight = document.body.style.paddingRight
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+
+    document.body.style.overflow = 'hidden'
+    if (scrollbarWidth > 0) document.body.style.paddingRight = `${scrollbarWidth}px`
+
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
 
     document.addEventListener('keydown', onKeyDown)
-    return () => document.removeEventListener('keydown', onKeyDown)
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      document.body.style.overflow = previousOverflow
+      document.body.style.paddingRight = previousPaddingRight
+    }
   }, [open, onClose])
 
   if (!mounted) return null
@@ -51,7 +62,7 @@ const Modal: React.FC<ModalProps> = ({
           <motion.button
             type="button"
             aria-label="Close modal"
-            className="absolute inset-0 bg-black/70"
+            className="absolute inset-0 bg-black/80"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -63,7 +74,7 @@ const Modal: React.FC<ModalProps> = ({
               <motion.div
                 role="dialog"
                 aria-modal="true"
-                className={`relative w-full ${maxWidthClassName} rounded-2xl border border-white/10 bg-gray-950/70 backdrop-blur-xl shadow-2xl`}
+                className={`relative w-full ${maxWidthClassName} rounded-2xl border border-white/15 bg-slate-950/90 backdrop-blur-xl shadow-2xl shadow-black/40 ring-1 ring-white/5`}
                 initial={{ opacity: 0, y: 20, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 20, scale: 0.98 }}
@@ -87,7 +98,7 @@ const Modal: React.FC<ModalProps> = ({
                   </button>
                 </div>
 
-                <div className="p-5 sm:p-6">
+                <div className="p-5 sm:p-6 max-h-[calc(100vh-10rem)] overflow-y-auto overscroll-contain">
                   {children}
                 </div>
               </motion.div>

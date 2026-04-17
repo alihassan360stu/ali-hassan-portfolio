@@ -193,7 +193,7 @@ const ProjectMediaViewer: React.FC<ProjectMediaViewerProps> = ({ screenshots = [
                         <button
                           type="button"
                           onClick={() => setFullscreenOpen(false)}
-                          className="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 flex items-center justify-center text-white"
+                          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-11 h-11 rounded-full bg-black/60 hover:bg-black/75 border border-white/20 backdrop-blur-md shadow-lg shadow-black/40 flex items-center justify-center text-white"
                           aria-label="Close"
                         >
                           <X className="h-5 w-5" />
