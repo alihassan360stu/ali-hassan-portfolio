@@ -6,7 +6,6 @@ import { Mail, Phone, MapPin, Github, Linkedin, Send, MessageSquare } from 'luci
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { personalInfo } from '@/data/personal'
-import HeroBackground from '@/components/HeroBackground'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -101,7 +100,6 @@ const Contact = () => {
 
   return (
     <section id="contact" className="section-padding pt-8 md:pt-12 lg:pt-16 relative overflow-hidden">
-      <HeroBackground />
       {/* Content */}
       <div className="container-padding relative z-10">
         <motion.div

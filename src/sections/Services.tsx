@@ -16,7 +16,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { services } from '@/data/services'
-import HeroBackground from '@/components/HeroBackground'
 
 const Services = () => {
   const containerVariants = {
@@ -52,7 +51,6 @@ const Services = () => {
 
   return (
     <section id="services" className="section-padding pb-8 md:pb-12 lg:pb-16 relative overflow-hidden">
-      <HeroBackground />
       <div className="container-padding relative z-10">
         <motion.div
           className="text-center mb-16"

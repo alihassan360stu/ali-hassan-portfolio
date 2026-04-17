@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { featuredProjects } from '@/data/projects'
-import HeroBackground from '@/components/HeroBackground'
 
 const clientProjects = featuredProjects.filter(project => project.projectType === 'client')
 const personalProjects = featuredProjects.filter(project => project.projectType === 'personal')

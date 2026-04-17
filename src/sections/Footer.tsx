@@ -62,9 +62,9 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-950 border-t border-gray-800">
-      <div className="container-padding py-12">
+      <div className="container-padding py-8 md:py-10">
         <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8"
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -203,7 +203,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <motion.div
-          className="border-t border-gray-800 pt-8"
+          className="border-t border-gray-800 pt-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
