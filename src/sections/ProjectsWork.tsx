@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import {
+  ChevronDown,
   CheckCircle2,
   ExternalLink,
   Github,
@@ -61,9 +62,9 @@ const itemVariants = {
 }
 
 const badgeStyles: Record<NonNullable<WorkProject['badge']>, string> = {
-  Confidential: 'bg-red-500/15 text-red-300 border-red-500/25',
-  Automation: 'bg-blue-500/15 text-blue-300 border-blue-500/25',
-  Featured: 'bg-purple-500/15 text-purple-300 border-purple-500/25'
+  Confidential: 'bg-red-500/[0.15] text-red-300 border-red-500/[0.25]',
+  Automation: 'bg-blue-500/[0.15] text-blue-300 border-blue-500/[0.25]',
+  Featured: 'bg-purple-500/[0.15] text-purple-300 border-purple-500/[0.25]'
 }
 
 const getTabIcon = (key: TabKey) => {
@@ -73,18 +74,21 @@ const getTabIcon = (key: TabKey) => {
 }
 
 const tabPillGradients: Record<TabKey, string> = {
-  client: 'from-blue-500/25 via-purple-500/15 to-transparent',
-  automation: 'from-blue-500/25 via-purple-500/15 to-transparent',
-  personal: 'from-emerald-500/20 via-blue-500/15 to-transparent'
+  client: 'from-blue-500/25 via-purple-500/[0.15] to-transparent',
+  automation: 'from-blue-500/25 via-purple-500/[0.15] to-transparent',
+  personal: 'from-emerald-500/20 via-blue-500/[0.15] to-transparent'
 }
 
 const ProjectsWork = () => {
   const reducedMotion = useReducedMotion()
+  const [mounted, setMounted] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [activeTab, setActiveTab] = useState<TabKey>('client')
   const [selected, setSelected] = useState<WorkProject | null>(null)
+  const [expandedId, setExpandedId] = useState<string | null>(null)
 
   React.useEffect(() => {
+    setMounted(true)
     const mq = window.matchMedia('(max-width: 768px)')
     const update = () => setIsMobile(mq.matches)
     update()
@@ -92,7 +96,8 @@ const ProjectsWork = () => {
     return () => mq.removeEventListener('change', update)
   }, [])
 
-  const motionEnabled = !reducedMotion && !isMobile
+  const motionEnabled = !reducedMotion
+  const fancyEnabled = motionEnabled && mounted && !isMobile
 
   const projects = useMemo(
     () => workProjects.filter((p) => p.category === (activeTab as ProjectCategory)),
@@ -128,7 +133,7 @@ const ProjectsWork = () => {
             Projects &amp; Work
           </motion.h2>
           <motion.p
-            className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-gray-300 sm:text-gray-400 max-w-3xl mx-auto leading-relaxed"
             variants={motionEnabled ? itemVariants : undefined}
           >
             A curated selection of client deliveries, automation systems, and personal builds.
@@ -144,8 +149,8 @@ const ProjectsWork = () => {
           viewport={motionEnabled ? { once: true, margin: '-100px' } : undefined}
         >
           <div className="mx-auto max-w-5xl">
-            <div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-1.5 sm:p-2 overflow-x-auto">
-              <div className="flex min-w-max gap-2 relative">
+            <div className="relative rounded-2xl border border-white/[0.15] bg-slate-950/80 sm:bg-slate-950/60 backdrop-blur-md p-1.5 sm:p-2">
+              <div className="grid grid-cols-3 gap-2 sm:flex sm:min-w-max sm:gap-2 relative sm:overflow-x-auto">
                 {tabs.map((t) => {
                   const Icon = getTabIcon(t.key)
                   const isActive = t.key === activeTab
@@ -154,23 +159,27 @@ const ProjectsWork = () => {
                       key={t.key}
                       type="button"
                       onClick={() => setActiveTab(t.key)}
-                      className="relative px-3.5 sm:px-4 py-2.5 rounded-xl text-sm md:text-base font-semibold whitespace-nowrap"
+                      className={`relative w-full px-2.5 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap border transition-colors flex items-center justify-center sm:justify-start gap-2 ${
+                        isActive
+                          ? 'bg-white/[0.14] border-white/[0.25] text-white'
+                          : 'bg-transparent border-transparent text-gray-100 hover:bg-white/[0.06] hover:border-white/[0.12] hover:text-white'
+                      }`}
                       aria-pressed={isActive}
                     >
                       {motionEnabled && isActive && (
                         <motion.div
                           layoutId="projects-work-active-tab"
-                          className="absolute inset-0 rounded-xl border border-white/20 bg-white/12"
+                          className="absolute inset-0 rounded-xl border border-white/[0.25] bg-white/[0.16]"
                           transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                         />
                       )}
 
-                      <span className={`relative z-10 flex items-center gap-2 ${isActive ? 'text-white' : 'text-gray-300 hover:text-white'}`}>
-                        <Icon className="h-4 w-4" />
-                        <span>{t.label}</span>
-                        <span className="ml-1 inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs border border-white/10 bg-white/5 text-gray-200">
-                          {tabCounts[t.key]}
-                        </span>
+                      <Icon className="relative z-10 h-4 w-4 text-white drop-shadow" />
+                      <span className="relative z-10 text-white drop-shadow truncate max-w-[7.5rem] sm:max-w-none">
+                        {t.label}
+                      </span>
+                      <span className="relative z-10 ml-1 inline-flex items-center justify-center px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-xs border border-white/10 bg-white/5 text-gray-100 drop-shadow">
+                        {tabCounts[t.key]}
                       </span>
                     </button>
                   )
@@ -178,9 +187,13 @@ const ProjectsWork = () => {
               </div>
             </div>
 
-            <div className="mt-5 text-center text-gray-300">
-              <p className="text-base md:text-lg">{activeMeta.description}</p>
-              <div className="mt-3 h-px w-24 mx-auto bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+            <div className="mt-4 sm:mt-5">
+              <div className="mx-auto max-w-3xl rounded-2xl border border-white/[0.12] bg-slate-950/55 backdrop-blur-md px-4 sm:px-6 py-4 text-center">
+                <p className="text-sm sm:text-base md:text-lg text-gray-200 sm:text-gray-300">
+                  {activeMeta.description}
+                </p>
+                <div className="mt-3 h-px w-24 mx-auto bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+              </div>
             </div>
           </div>
         </motion.div>
@@ -220,12 +233,30 @@ const ProjectsWork = () => {
             {projects.map((p) => (
               <motion.article
                 key={p.id}
-                className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden hover:bg-white/8 transition-colors"
+                className="group rounded-2xl border border-white/[0.15] bg-slate-950/55 backdrop-blur-md overflow-hidden hover:bg-slate-950/70 transition-colors"
                 variants={motionEnabled ? itemVariants : undefined}
-                whileHover={motionEnabled ? { y: -3 } : undefined}
+                whileHover={fancyEnabled ? { y: -3 } : undefined}
               >
                 <div className={`h-8 sm:h-10 w-full bg-gradient-to-r ${tabPillGradients[p.category]} opacity-90`} />
                 <div className="p-5 sm:p-6">
+                  {isMobile && (
+                    <div className="mb-4">
+                      <button
+                        type="button"
+                        onClick={() => setExpandedId((v) => (v === p.id ? null : p.id))}
+                        className="w-full inline-flex items-center justify-between gap-3 rounded-xl border border-white/[0.12] bg-white/[0.06] px-4 py-3 text-left"
+                        aria-expanded={expandedId === p.id}
+                      >
+                        <span className="text-sm font-semibold text-gray-100">
+                          {expandedId === p.id ? 'Hide details' : 'View details'}
+                        </span>
+                        <ChevronDown
+                          className={`h-5 w-5 text-gray-200 transition-transform ${expandedId === p.id ? 'rotate-180' : ''}`}
+                        />
+                      </button>
+                    </div>
+                  )}
+
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <h3 className="text-xl font-semibold text-white leading-snug">
@@ -236,7 +267,7 @@ const ProjectsWork = () => {
                           Role: <span className="text-white">{p.role}</span>
                         </p>
                       )}
-                      <p className="mt-2 text-gray-400 leading-relaxed line-clamp-4">
+                      <p className={`mt-2 text-gray-300 leading-relaxed ${isMobile ? '' : 'line-clamp-4'}`}>
                         {p.description}
                       </p>
                     </div>
@@ -249,14 +280,49 @@ const ProjectsWork = () => {
                     )}
                   </div>
 
+                  {isMobile && expandedId === p.id && (
+                    <div className="mt-5 space-y-5">
+                      {p.features?.length ? (
+                        <div className="rounded-2xl border border-white/[0.12] bg-white/[0.06] p-4">
+                          <div className="text-sm font-semibold text-white">Key Features</div>
+                          <ul className="mt-3 space-y-2">
+                            {p.features.map((f) => (
+                              <li key={f} className="flex gap-2 text-sm text-gray-200">
+                                <CheckCircle2 className="h-4 w-4 text-emerald-200 mt-0.5 flex-shrink-0" />
+                                <span className="leading-relaxed">{f}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ) : null}
+
+                      {p.techStack?.length ? (
+                        <div className="rounded-2xl border border-white/[0.12] bg-white/[0.06] p-4">
+                          <div className="text-sm font-semibold text-white">Tech Stack</div>
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            {p.techStack.map((t) => (
+                              <span key={t} className="skill-badge">
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      ) : null}
+                    </div>
+                  )}
+
                   <div className="mt-4 flex flex-wrap gap-2">
-                    {p.techStack.slice(0, 6).map((t) => (
-                      <span key={t} className="skill-badge">
-                        {t}
-                      </span>
-                    ))}
-                    {p.techStack.length > 6 && (
-                      <span className="skill-badge">+{p.techStack.length - 6}</span>
+                    {!isMobile && (
+                      <>
+                        {p.techStack.slice(0, 6).map((t) => (
+                          <span key={t} className="skill-badge">
+                            {t}
+                          </span>
+                        ))}
+                        {p.techStack.length > 6 && (
+                          <span className="skill-badge">+{p.techStack.length - 6}</span>
+                        )}
+                      </>
                     )}
                   </div>
 
@@ -291,7 +357,7 @@ const ProjectsWork = () => {
                           <button
                             type="button"
                             onClick={() => setSelected(p)}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold border border-white/12 bg-white/6 hover:bg-white/10 text-gray-100 transition-colors"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold border border-white/[0.12] bg-white/[0.06] hover:bg-white/10 text-gray-100 transition-colors"
                           >
                             <ImageIcon className="h-4 w-4" />
                             View Screenshots
@@ -319,7 +385,7 @@ const ProjectsWork = () => {
                             href={p.sourceCodeUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold border border-white/12 bg-white/6 hover:bg-white/10 text-gray-100 transition-colors"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold border border-white/[0.12] bg-white/[0.06] hover:bg-white/10 text-gray-100 transition-colors"
                           >
                             <Github className="h-4 w-4" />
                             Source Code
@@ -353,8 +419,8 @@ const ProjectsWork = () => {
           maxWidthClassName="max-w-6xl"
         >
           <div className="space-y-8">
-            <div className="rounded-2xl border border-white/15 bg-white/7 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] overflow-hidden">
-              <div className="p-6 sm:p-8 bg-gradient-to-r from-blue-500/16 via-purple-500/16 to-transparent">
+            <div className="rounded-2xl border border-white/[0.15] bg-white/[0.07] shadow-[0_0_0_1px_rgba(255,255,255,0.04)] overflow-hidden">
+              <div className="p-6 sm:p-8 bg-gradient-to-r from-blue-500/[0.16] via-purple-500/[0.16] to-transparent">
                 <div className="flex flex-col gap-5">
                   <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5">
                     <div className="min-w-0">
@@ -388,14 +454,14 @@ const ProjectsWork = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
               <div className="lg:col-span-7 space-y-6">
-                <div className="rounded-2xl border border-white/15 bg-white/7 p-6 sm:p-8">
+                <div className="rounded-2xl border border-white/[0.15] bg-white/[0.07] p-6 sm:p-8">
                   <div className="flex items-end justify-between gap-4">
                     <div>
                       <h4 className="text-xl font-semibold text-white tracking-tight">Media</h4>
                       <p className="mt-2 text-sm text-gray-300">Screenshots and demos (when shareable). Click an image to view fullscreen.</p>
                     </div>
                     {selected?.media?.screenshots?.length ? (
-                      <span className="text-xs font-semibold text-gray-200 border border-white/12 bg-white/6 rounded-full px-3 py-1">
+                      <span className="text-xs font-semibold text-gray-200 border border-white/[0.12] bg-white/[0.06] rounded-full px-3 py-1">
                         {selected.media.screenshots.length} screenshots
                       </span>
                     ) : null}
@@ -407,9 +473,9 @@ const ProjectsWork = () => {
                         videoUrl={selected?.media?.videoUrl}
                       />
                     ) : (
-                      <div className="rounded-2xl border border-white/15 bg-white/6 p-6">
+                      <div className="rounded-2xl border border-white/[0.15] bg-white/[0.06] p-6">
                         <div className="flex items-start gap-4">
-                          <div className="h-10 w-10 rounded-xl border border-white/12 bg-white/6 flex items-center justify-center">
+                          <div className="h-10 w-10 rounded-xl border border-white/[0.12] bg-white/[0.06] flex items-center justify-center">
                             <Shield className="h-5 w-5 text-gray-200" />
                           </div>
                           <div className="min-w-0">
@@ -427,7 +493,7 @@ const ProjectsWork = () => {
                 </div>
 
                 {selected?.contributions?.length ? (
-                  <div className="rounded-2xl border border-white/15 bg-white/7 p-6 sm:p-8">
+                  <div className="rounded-2xl border border-white/[0.15] bg-white/[0.07] p-6 sm:p-8">
                     <div className="flex items-end justify-between gap-4">
                       <div>
                         <h4 className="text-xl font-semibold text-white tracking-tight">My Responsibilities</h4>
@@ -449,7 +515,7 @@ const ProjectsWork = () => {
 
               <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-6 h-fit">
                 {selected?.features?.length ? (
-                  <div className="rounded-2xl border border-white/15 bg-white/7 p-6 sm:p-8">
+                  <div className="rounded-2xl border border-white/[0.15] bg-white/[0.07] p-6 sm:p-8">
                     <div className="flex items-end justify-between gap-4">
                       <div>
                         <h4 className="text-xl font-semibold text-white tracking-tight">Key Features</h4>
@@ -469,7 +535,7 @@ const ProjectsWork = () => {
                 ) : null}
 
                 {selected?.techStack?.length ? (
-                  <div className="rounded-2xl border border-white/15 bg-white/7 p-6 sm:p-8">
+                  <div className="rounded-2xl border border-white/[0.15] bg-white/[0.07] p-6 sm:p-8">
                     <div className="flex items-end justify-between gap-4">
                       <div>
                         <h4 className="text-xl font-semibold text-white tracking-tight">Tech Stack</h4>
