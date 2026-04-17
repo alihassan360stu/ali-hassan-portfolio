@@ -9,17 +9,7 @@ import HeroBackground from '@/components/HeroBackground'
 
 const About = () => {
   const reducedMotion = useReducedMotion()
-  const [isMobile, setIsMobile] = React.useState(false)
-
-  React.useEffect(() => {
-    const mq = window.matchMedia('(max-width: 768px)')
-    const update = () => setIsMobile(mq.matches)
-    update()
-    mq.addEventListener('change', update)
-    return () => mq.removeEventListener('change', update)
-  }, [])
-
-  const motionEnabled = !reducedMotion && !isMobile
+  const motionEnabled = !reducedMotion
 
   const containerVariants = {
     hidden: { opacity: 0 },
