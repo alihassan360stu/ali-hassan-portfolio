@@ -3,7 +3,7 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles, Code, Zap, X } from 'lucide-react'
+import { ArrowRight, Github, Linkedin, Mail, Code, Zap, X, Check, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import MotionOnDesktop from '@/components/MotionOnDesktop'
 import { personalInfo } from '@/data/personal'
@@ -54,57 +54,168 @@ const Hero = () => {
       {/* Content */}
       <MotionOnDesktop
         as="div"
-        className="container-padding relative z-10 text-center"
+        className="container-padding relative z-10"
         motionProps={{
           variants: containerVariants,
           initial: 'hidden',
           animate: 'visible',
         }}
       >
-        {/* Status Badge */}
-        <MotionOnDesktop as="div" motionProps={{ variants: itemVariants }}>
-          <MotionOnDesktop
-            as="div"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30 text-green-400 mt-2 sm:mt-3 mb-6 md:mb-8"
-            motionProps={{
-              whileHover: { scale: 1.05 },
-              transition: { duration: 0.2 },
-            }}
-          >
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-sm font-medium">Available for Projects</span>
-          </MotionOnDesktop>
-        </MotionOnDesktop>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          <div className="lg:col-span-7 text-center lg:text-left">
+            {/* Status Badge */}
+            <MotionOnDesktop as="div" motionProps={{ variants: itemVariants }}>
+              <MotionOnDesktop
+                as="div"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30 text-green-400 mt-2 sm:mt-3 mb-6 md:mb-8"
+                motionProps={{
+                  whileHover: { scale: 1.03 },
+                  transition: { duration: 0.2 },
+                }}
+              >
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                <span className="text-sm font-medium">Available for Projects</span>
+              </MotionOnDesktop>
+            </MotionOnDesktop>
 
-        {/* Profile Picture */}
-        <MotionOnDesktop
-          as="div"
-          className="flex justify-center mb-6 md:mb-8"
-          motionProps={{ variants: itemVariants }}
-        >
-          <MotionOnDesktop
-            as="div"
-            className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 p-1 flex items-center justify-center shadow-2xl shadow-purple-500/25 border-2 border-white/10"
-            motionProps={{
-              whileHover: { scale: 1.1, rotate: 5 },
-              transition: { duration: 0.3 },
-            }}
-          >
-            <button
-              type="button"
-              onClick={() => setProfileOpen(true)}
-              className="h-full w-full rounded-full overflow-hidden"
-              aria-label="Open profile image"
+            {/* Main Heading */}
+            <MotionOnDesktop as="div" className="mb-5 md:mb-7" motionProps={{ variants: itemVariants }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3">
+                <span className="bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent leading-tight">
+                  Hi, I'm Ali Hassan
+                </span>
+              </h1>
+              <div className="text-lg md:text-xl lg:text-2xl text-gray-200 font-semibold">
+                Full Stack Developer & Automation Engineer
+              </div>
+            </MotionOnDesktop>
+
+            {/* Tagline */}
+            <MotionOnDesktop
+              as="p"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-400 max-w-3xl mx-auto lg:mx-0 leading-relaxed font-light mb-7"
+              motionProps={{ variants: itemVariants }}
             >
-              <img
-                src={personalInfo.avatar}
-                alt={personalInfo.name}
-                className="h-full w-full rounded-full object-cover"
-                loading="eager"
-              />
-            </button>
-          </MotionOnDesktop>
-        </MotionOnDesktop>
+              I build scalable SaaS platforms, automation systems, and high-performance web applications focused on real-world business impact, scalability, and reliability.
+            </MotionOnDesktop>
+
+            <MotionOnDesktop
+              as="div"
+              className="max-w-3xl mx-auto lg:mx-0 mb-8"
+              motionProps={{ variants: itemVariants }}
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+                {[
+                  '4+ Years Experience in Full Stack Development',
+                  'Built Banking Automation System (UBL - 24 Modules)',
+                  'SaaS & API Development Experience',
+                  'Automation using Java Access Bridge (JAB), Selenium',
+                  'React, Next.js, Node.js, TypeScript expert',
+                  'n8n automation expert',
+                ].map((text) => (
+                  <div
+                    key={text}
+                    className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm px-4 py-3"
+                  >
+                    <Check className="h-5 w-5 text-emerald-400 flex-shrink-0" />
+                    <span className="text-gray-200 font-semibold">{text}</span>
+                  </div>
+                ))}
+              </div>
+            </MotionOnDesktop>
+
+            {/* CTA Buttons */}
+            <MotionOnDesktop
+              as="div"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8"
+              motionProps={{ variants: itemVariants }}
+            >
+              <Button
+                variant="primary"
+                size="lg"
+                href="#projects"
+                className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold shadow-lg shadow-purple-500/25 transition-all duration-200"
+              >
+                <Code className="mr-2 h-5 w-5" />
+                View My Work
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <Button
+                variant="secondary"
+                size="lg"
+                href="#contact"
+                className="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 font-semibold transition-all duration-200"
+              >
+                <Mail className="mr-2 h-5 w-5" />
+                Get in Touch
+              </Button>
+            </MotionOnDesktop>
+
+            {/* Social Links */}
+            <MotionOnDesktop
+              as="div"
+              className="hidden sm:flex justify-center lg:justify-start gap-4"
+              motionProps={{ variants: itemVariants }}
+            >
+              <MotionOnDesktop
+                as="a"
+                href={personalInfo.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 flex items-center justify-center transition-all duration-200"
+                motionProps={{ whileHover: { scale: 1.06, y: -2 }, whileTap: { scale: 0.97 } }}
+              >
+                <Github className="h-6 w-6" />
+              </MotionOnDesktop>
+              <MotionOnDesktop
+                as="a"
+                href={personalInfo.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 flex items-center justify-center transition-all duration-200"
+                motionProps={{ whileHover: { scale: 1.06, y: -2 }, whileTap: { scale: 0.97 } }}
+              >
+                <Linkedin className="h-6 w-6" />
+              </MotionOnDesktop>
+              <MotionOnDesktop
+                as="a"
+                href={`mailto:${personalInfo.email}`}
+                className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 flex items-center justify-center transition-all duration-200"
+                motionProps={{ whileHover: { scale: 1.06, y: -2 }, whileTap: { scale: 0.97 } }}
+              >
+                <Mail className="h-6 w-6" />
+              </MotionOnDesktop>
+            </MotionOnDesktop>
+          </div>
+
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            {/* Profile Picture */}
+            <MotionOnDesktop as="div" motionProps={{ variants: itemVariants }}>
+              <MotionOnDesktop
+                as="div"
+                className="w-44 h-44 sm:w-52 sm:h-52 lg:w-72 lg:h-72 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 p-1 flex items-center justify-center shadow-2xl shadow-purple-500/25 border-2 border-white/10"
+                motionProps={{
+                  whileHover: { scale: 1.03 },
+                  transition: { duration: 0.25 },
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => setProfileOpen(true)}
+                  className="h-full w-full rounded-full overflow-hidden"
+                  aria-label="Open profile image"
+                >
+                  <img
+                    src={personalInfo.avatar}
+                    alt={personalInfo.name}
+                    className="h-full w-full rounded-full object-cover"
+                    loading="eager"
+                  />
+                </button>
+              </MotionOnDesktop>
+            </MotionOnDesktop>
+          </div>
+        </div>
 
         {mounted &&
           createPortal(
@@ -158,111 +269,10 @@ const Hero = () => {
             document.body
           )}
 
-        {/* Main Heading */}
-        <MotionOnDesktop as="div" className="mb-6 md:mb-8" motionProps={{ variants: itemVariants }}>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3">
-            <span className="bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent leading-tight">
-              Hi, I'm {personalInfo.name.split(' ')[0]}
-            </span>
-          </h1>
-          <MotionOnDesktop
-            as="div"
-            className="flex items-center justify-center gap-2 text-xl md:text-2xl lg:text-3xl text-gray-300"
-            motionProps={{ variants: itemVariants }}
-          >
-            <Sparkles className="h-6 w-6 text-yellow-400" />
-            <span className="font-medium">{personalInfo.title}</span>
-            <Sparkles className="h-6 w-6 text-yellow-400" />
-          </MotionOnDesktop>
-        </MotionOnDesktop>
-
-        {/* Tagline */}
-        <MotionOnDesktop
-          as="p"
-          className="text-lg md:text-xl lg:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-light mb-6 sm:mb-8"
-          motionProps={{ variants: itemVariants }}
-        >
-          {personalInfo.tagline}
-        </MotionOnDesktop>
-
-        {/* CTA Buttons */}
-        <MotionOnDesktop
-          as="div"
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-10 md:mb-12"
-          motionProps={{ variants: itemVariants }}
-        >
-          <Button
-            variant="primary"
-            size="lg"
-            href="#projects"
-            className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold shadow-lg shadow-purple-500/25 transition-all duration-200"
-          >
-            <Code className="mr-2 h-5 w-5" />
-            View My Work
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <Button
-            variant="secondary"
-            size="lg"
-            href="#contact"
-            className="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 font-semibold transition-all duration-200"
-          >
-            <Mail className="mr-2 h-5 w-5" />
-            Let's Talk
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            href={personalInfo.cv}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border-white/20 text-white hover:bg-white/10 font-semibold transition-all duration-200"
-          >
-            <Download className="mr-2 h-5 w-5" />
-            Download CV
-          </Button>
-        </MotionOnDesktop>
-
-        {/* Social Links */}
-        <MotionOnDesktop
-          as="div"
-          className="hidden sm:flex justify-center gap-4 mb-12"
-          motionProps={{ variants: itemVariants }}
-        >
-          <MotionOnDesktop
-            as="a"
-            href={personalInfo.social.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 flex items-center justify-center transition-all duration-200"
-            motionProps={{ whileHover: { scale: 1.1, y: -2 }, whileTap: { scale: 0.95 } }}
-          >
-            <Github className="h-6 w-6" />
-          </MotionOnDesktop>
-          <MotionOnDesktop
-            as="a"
-            href={personalInfo.social.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 flex items-center justify-center transition-all duration-200"
-            motionProps={{ whileHover: { scale: 1.1, y: -2 }, whileTap: { scale: 0.95 } }}
-          >
-            <Linkedin className="h-6 w-6" />
-          </MotionOnDesktop>
-          <MotionOnDesktop
-            as="a"
-            href={`mailto:${personalInfo.email}`}
-            className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 flex items-center justify-center transition-all duration-200"
-            motionProps={{ whileHover: { scale: 1.1, y: -2 }, whileTap: { scale: 0.95 } }}
-          >
-            <Mail className="h-6 w-6" />
-          </MotionOnDesktop>
-        </MotionOnDesktop>
-
         {/* Stats */}
         <MotionOnDesktop
           as="div"
-          className="grid grid-cols-4 gap-2 sm:gap-4 md:gap-8 mb-3 md:mb-3"
+          className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mt-10"
           motionProps={{ variants: itemVariants }}
         >
           {[
@@ -294,7 +304,7 @@ const Hero = () => {
         {/* Scroll Indicator */}
         <MotionOnDesktop
           as="div"
-          className="flex justify-center mb-3 pointer-events-none"
+          className="flex justify-center mt-10 pointer-events-none"
           motionProps={{
             animate: { y: [0, 10, 0] },
             transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' },

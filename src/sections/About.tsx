@@ -2,10 +2,9 @@
 
 import React from 'react'
 import { useReducedMotion } from 'framer-motion'
-import { Award, Briefcase, Users, Zap, CheckCircle, Target, Lightbulb } from 'lucide-react'
+import { Award, Briefcase, Users, CheckCircle } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/Card'
 import MotionOnDesktop from '@/components/MotionOnDesktop'
-import { personalInfo } from '@/data/personal'
 
 const About = () => {
   const reducedMotion = useReducedMotion()
@@ -32,27 +31,6 @@ const About = () => {
       },
     },
   }
-
-  const expertise = [
-    {
-      icon: Zap,
-      title: 'Automation Excellence',
-      description: 'Specialized in building comprehensive automation systems that reduce manual effort and improve operational efficiency by up to 85%.',
-      color: 'from-blue-500 to-purple-600'
-    },
-    {
-      icon: Target,
-      title: 'SaaS Development',
-      description: 'Expert in developing scalable multi-tenant SaaS platforms with modern architecture patterns and enterprise-grade security.',
-      color: 'from-green-500 to-emerald-600'
-    },
-    {
-      icon: Lightbulb,
-      title: 'Enterprise Solutions',
-      description: 'Proven track record of delivering production systems for banks and large-scale applications with 99.9% uptime and compliance.',
-      color: 'from-orange-500 to-red-600'
-    }
-  ]
 
   const highlights = [
     'Automation systems that reduce manual work and improve reliability',
@@ -104,7 +82,7 @@ const About = () => {
           </MotionOnDesktop>
         </MotionOnDesktop>
 
-        {/* Professional Summary */}
+        {/* About Content */}
         <MotionOnDesktop
           as="div"
           className="mb-10 sm:mb-12 md:mb-14"
@@ -120,19 +98,31 @@ const About = () => {
           }
         >
           <Card glass className="p-6 sm:p-8 md:p-12 overflow-hidden">
-            <CardContent className="space-y-8 sm:space-y-10">
+            <CardContent className="space-y-8">
               <MotionOnDesktop as="div" className="relative" motionProps={motionEnabled ? { variants: itemVariants } : undefined}>
                 <div className="absolute inset-0 -m-12 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5" />
-                <div className="relative grid lg:grid-cols-2 gap-6 sm:gap-10">
-                  <div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-5">
-                      Professional Summary
-                    </h3>
-                    <p className="text-base md:text-lg text-gray-300 leading-relaxed">
-                      {personalInfo.intro}
-                    </p>
 
-                    <div className="mt-5 sm:mt-6 flex flex-wrap gap-2">
+                <div className="relative grid lg:grid-cols-12 gap-6 sm:gap-10">
+                  <div className="lg:col-span-7">
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-5">
+                      About
+                    </h3>
+                    <div className="text-base md:text-lg text-gray-300 leading-relaxed space-y-4">
+                      <p>
+                        I'm a Full Stack Developer with 4+ years of experience building scalable SaaS platforms, automation tools, and high-performance web apps.
+                      </p>
+                      <p>
+                        I specialize in solving complex problems — from backend architecture to frontend performance optimization.
+                      </p>
+                      <p>
+                        I have worked on real-world systems including automation for banking modules (UBL), SaaS dashboards, and real-time applications.
+                      </p>
+                      <p>
+                        My goal is simple: build fast, secure, and scalable systems that actually deliver results.
+                      </p>
+                    </div>
+
+                    <div className="mt-6 flex flex-wrap gap-2">
                       {focusAreas.map((item) => (
                         <span
                           key={item}
@@ -144,174 +134,50 @@ const About = () => {
                     </div>
                   </div>
 
-                  <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-6">
-                    <h4 className="text-lg md:text-xl font-semibold text-white mb-4">
-                      Highlights
-                    </h4>
-                    <ul className="space-y-3">
-                      {highlights.map((h) => (
-                        <li key={h} className="flex items-start gap-3 text-gray-300">
-                          <CheckCircle className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
-                          <span className="leading-relaxed">{h}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="lg:col-span-5">
+                    <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-6">
+                      <h4 className="text-lg md:text-xl font-semibold text-white mb-4">
+                        What you can expect
+                      </h4>
+                      <ul className="space-y-3">
+                        {highlights.map((h) => (
+                          <li key={h} className="flex items-start gap-3 text-gray-300">
+                            <CheckCircle className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                            <span className="leading-relaxed">{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </MotionOnDesktop>
 
-              {/* Expertise Areas */}
-              <MotionOnDesktop as="div" motionProps={motionEnabled ? { variants: itemVariants } : undefined}>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-5 sm:mb-8">
-                  Expertise Focus
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-                  {expertise.map((item, index) => {
-                    const Icon = item.icon
-                    return (
-                      <MotionOnDesktop
-                        as="div"
-                        key={index}
-                        motionProps={
-                          motionEnabled
-                            ? {
-                                variants: itemVariants,
-                                whileHover: { scale: 1.05 },
-                                transition: { duration: 0.2 },
-                              }
-                            : undefined
-                        }
-                      >
-                        <div
-                          className={
-                            'group relative h-full rounded-3xl p-[1px] bg-gradient-to-br from-white/10 via-white/5 to-white/10 ' +
-                            'hover:from-blue-500/25 hover:via-purple-500/15 hover:to-pink-500/20 transition-colors duration-300'
-                          }
-                        >
-                          <div className="h-full rounded-3xl bg-gray-900/35 backdrop-blur-xl border border-white/10 px-5 py-6 sm:px-6">
-                            <div className="flex items-start gap-4">
-                              <MotionOnDesktop
-                                as="div"
-                                className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-lg shadow-black/30 ring-1 ring-white/15`}
-                                motionProps={
-                                  motionEnabled
-                                    ? {
-                                        whileHover: { scale: 1.08, rotate: 4 },
-                                        transition: { duration: 0.2 },
-                                      }
-                                    : undefined
-                                }
-                              >
-                                <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
-                              </MotionOnDesktop>
-
-                              <div className="flex-1">
-                                <h4 className="text-lg sm:text-xl font-semibold text-white leading-tight">
-                                  {item.title}
-                                </h4>
-                                <div className="mt-3 h-px w-full bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
-                              </div>
-                            </div>
-
-                            <p className="mt-4 text-sm sm:text-base text-gray-300/90 leading-relaxed">
-                              {item.description}
-                            </p>
-                          </div>
-                        </div>
-                      </MotionOnDesktop>
-                    )
-                  })}
-                </div>
-              </MotionOnDesktop>
-            </CardContent>
-          </Card>
-        </MotionOnDesktop>
-
-
-
-        {/* Why Work With Me */}
-        <MotionOnDesktop
-          as="div"
-          motionProps={
-            motionEnabled
-              ? {
-                  variants: containerVariants,
-                  initial: 'hidden',
-                  whileInView: 'visible',
-                  viewport: { once: true, margin: '-100px' },
-                }
-              : undefined
-          }
-        >
-          <Card glass className="p-8 md:p-12">
-            <CardContent className="space-y-8">
-              <MotionOnDesktop as="div" className="text-center" motionProps={motionEnabled ? { variants: itemVariants } : undefined}>
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                  Why Work With Me
-                </h3>
-                <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                  I bring a unique combination of technical expertise and business understanding to deliver exceptional results
-                </p>
-              </MotionOnDesktop>
-              
-              <div className="grid md:grid-cols-3 gap-8">
+              <MotionOnDesktop
+                as="div"
+                className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+                motionProps={motionEnabled ? { variants: itemVariants } : undefined}
+              >
                 {[
-                  {
-                    icon: Zap,
-                    color: 'from-blue-500 to-purple-600',
-                    title: 'Fast Delivery',
-                    description: 'Rapid development with clean, maintainable code that scales with your business needs.',
-                  },
-                  {
-                    icon: Target,
-                    color: 'from-emerald-500 to-teal-600',
-                    title: 'Ownership & reliability',
-                    description: 'I take full ownership of features — from design, to implementation, to production hardening.'
-                  },
-                  {
-                    icon: Lightbulb,
-                    color: 'from-orange-500 to-pink-600',
-                    title: 'Clear communication',
-                    description: 'Regular updates, clear trade-offs, and fast iteration cycles.'
-                  }
-                ].map((item, index) => (
-                  <MotionOnDesktop
-                    as="div"
-                    key={index}
-                    className="text-center"
-                    motionProps={
-                      motionEnabled
-                        ? {
-                            variants: itemVariants,
-                            whileHover: { scale: 1.05 },
-                            transition: { duration: 0.2 },
-                          }
-                        : undefined
-                    }
+                  { icon: Briefcase, label: 'Experience', value: '4+ years' },
+                  { icon: Award, label: 'Automation', value: 'Banking modules (UBL)' },
+                  { icon: Users, label: 'Delivery', value: 'Production-ready systems' },
+                ].map((m) => (
+                  <div
+                    key={m.label}
+                    className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5"
                   >
-                    <MotionOnDesktop
-                      as="div"
-                      className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center`}
-                      motionProps={
-                        motionEnabled
-                          ? {
-                              whileHover: { scale: 1.1, rotate: 5 },
-                              transition: { duration: 0.2 },
-                            }
-                          : undefined
-                      }
-                    >
-                      <item.icon className="h-10 w-10 text-white" />
-                    </MotionOnDesktop>
-                    <h4 className="text-xl font-semibold text-white mb-3">
-                      {item.title}
-                    </h4>
-                    <p className="text-gray-400 leading-relaxed">
-                      {item.description}
-                    </p>
-                  </MotionOnDesktop>
+                    <div className="flex items-center gap-3">
+                      <div className="h-11 w-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
+                        <m.icon className="h-5 w-5 text-white" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-xs uppercase tracking-wider text-gray-400 font-semibold">{m.label}</div>
+                        <div className="text-white font-semibold mt-1 leading-snug">{m.value}</div>
+                      </div>
+                    </div>
+                  </div>
                 ))}
-              </div>
+              </MotionOnDesktop>
             </CardContent>
           </Card>
         </MotionOnDesktop>

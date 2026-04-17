@@ -11,85 +11,57 @@ export const services: Service[] = [
   {
     id: 'saas-development',
     title: 'SaaS Development',
-    description: 'Building scalable, multi-tenant SaaS applications with modern architecture and best practices.',
+    description: 'Build scalable SaaS platforms with secure architecture, authentication, dashboards, and API-driven backend systems.',
     features: [
-      'Multi-tenant architecture design',
-      'Scalable database design',
-      'Subscription management',
-      'Analytics and reporting',
-      'API development and documentation'
+      'Secure authentication and role-based access',
+      'Dashboards and admin panels',
+      'API-first backend design',
+      'Scalable database and data modeling',
+      'Deployment-ready architecture'
     ],
     icon: 'cloud',
     category: 'Development'
   },
   {
-    id: 'workflow-automation',
-    title: 'Workflow Automation',
-    description: 'Designing and implementing automated workflows to streamline business processes and reduce manual effort.',
+    id: 'web-automation-engineering',
+    title: 'Web Automation Engineering',
+    description: 'Automate complex workflows using Java Access Bridge (JAB) and Selenium to reduce manual effort and increase efficiency.',
     features: [
-      'Process analysis and optimization',
-      'Custom workflow engine development',
-      'Integration with existing systems',
-      'Real-time monitoring and logging',
-      'Error handling and recovery'
-    ],
-    icon: 'git-branch',
-    category: 'Automation'
-  },
-  {
-    id: 'web-automation',
-    title: 'Web Automation',
-    description: 'Creating robust web automation solutions for testing, data extraction, and process automation.',
-    features: [
-      'Web scraping and data extraction',
-      'Automated testing frameworks',
-      'Browser automation',
-      'CAPTCHA solving integration',
-      'Anti-detection techniques'
+      'Java Access Bridge (JAB) automation for desktop apps',
+      'Selenium browser automation',
+      'Reliable selectors, retries, and error handling',
+      'Automation reporting and logs',
+      'Workflow analysis and optimization'
     ],
     icon: 'globe',
     category: 'Automation'
   },
   {
-    id: 'api-development',
-    title: 'API Development',
-    description: 'Building RESTful and GraphQL APIs with proper documentation, testing, and security measures.',
+    id: 'backend-api-development',
+    title: 'Backend & API Development',
+    description: 'Design and develop high-performance REST APIs and backend systems using Node.js, Express, and TypeScript.',
     features: [
-      'RESTful API design',
-      'GraphQL development',
-      'API documentation',
+      'REST API design and implementation',
       'Authentication and authorization',
-      'Rate limiting and caching'
+      'Validation, error handling, and logging',
+      'API documentation and testing',
+      'Integration with databases and external services'
     ],
     icon: 'api',
     category: 'Development'
   },
   {
     id: 'performance-optimization',
-    title: 'Performance Optimization',
-    description: 'Optimizing application performance, database queries, and infrastructure for better user experience.',
+    title: 'Performance & System Optimization',
+    description: 'Optimize applications for speed, scalability, and production-grade reliability.',
     features: [
-      'Database query optimization',
+      'Frontend performance improvements',
+      'Backend performance profiling',
       'Caching strategies',
-      'Code optimization',
-      'Infrastructure tuning',
-      'Performance monitoring'
+      'Scalability and load considerations',
+      'Production monitoring approach'
     ],
     icon: 'zap',
-    category: 'Optimization'
-  },
-  {
-    id: 'bug-fixing-optimization',
-    title: 'Bug Fixing & Optimization',
-    description: 'Identifying and fixing bugs, optimizing code quality, and improving application reliability.',
-    features: [
-      'Bug identification and fixing',
-      'Code refactoring',
-      'Performance improvements',
-      'Security vulnerability fixes',
-      'Code review and optimization'
-    ],
-    icon: 'bug',
     category: 'Optimization'
   }
 ]
